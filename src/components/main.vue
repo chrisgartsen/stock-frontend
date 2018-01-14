@@ -8,7 +8,6 @@
     <button class="button" v-on:click="addOne">AddOne</button>
     <br/>
     <br/>
-    {{ name }}
   </div>
 </template>
 
@@ -17,9 +16,6 @@ import Axios from 'axios'
 
 export default {
   computed: {
-    name() {
-      return this.$store.getters.getName
-    }
   },
   methods: {
     fetchAll: function () {
