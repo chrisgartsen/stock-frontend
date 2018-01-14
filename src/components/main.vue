@@ -2,8 +2,13 @@
   <div>
     Testing
     <br/>
-    <button v-on:click="fetchAll">Fetch All</button>
-    <button v-on:click="addOne">AddOne</button>
+    <button class="button is-primary" v-on:click="fetchAll">Fetch All</button>
+    <br/>
+    <br/>
+    <button class="button" v-on:click="addOne">AddOne</button>
+    <br/>
+    <br/>
+    {{ name }}
   </div>
 </template>
 
@@ -11,6 +16,11 @@
 import Axios from 'axios'
 
 export default {
+  computed: {
+    name() {
+      return this.$store.getters.getName
+    }
+  },
   methods: {
     fetchAll: function () {
       console.log("Getting all items")
