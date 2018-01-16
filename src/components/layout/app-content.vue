@@ -1,6 +1,8 @@
 <template>
   <main>
-    <router-view/>
+    <div class="columns">
+      <router-view/>
+    </div>
   </main>
 </template>
 
