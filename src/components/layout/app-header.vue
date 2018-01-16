@@ -34,9 +34,7 @@
     <nav class="tabs">
       <div class="container">
         <ul>
-          <li class="is-active"><a>Items</a></li>
-          <li><a id='hero-menu'>Shopping List</a></li>
-          <li><a>Admin</a></li>
+          <router-link :to="{name: 'items'}" tag="li" exact><a>Items</a></router-link>
         </ul>
       </div>
     </nav>
