@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <span>Stock </span>
+    <span>Stock @2018</span>
   </footer>
 </template>
 
