@@ -1,4 +1,7 @@
 import Axios from 'axios'
+import HttpApi from './../resource/HttpApi'
+
+let api = new HttpApi('items')
 
 export default {
   state: {
@@ -28,17 +31,15 @@ export default {
   actions: {
     FETCH_ITEMS({commit}) {
       commit("SET_LOADING_STATE", true)
-      Axios.get("http://localhost:3000/items")
-        .then((response) => {
-          commit("SET_ITEMS", response.data)
-          commit("SET_LOADING_STATE", false)
-        })
-        .catch((error)=> {
-          console.log(error.response.data)
-        })
+      api.getAll().then((response) => {
+        commit("SET_ITEMS", response.data)
+        commit("SET_LOADING_STATE", false)
+      }).catch((error)=> {
+        console.log(error.response.data)
+      })
     },
     DELETE_ITEM({commit}, itemId) {
-      Axios.delete("http://localhost:3000/items/"+itemId).then((response) => {
+      api.delete(itemId).then((response) => {
         commit("REMOVE_ITEM", itemId)
       }).catch((error) =>{
         console.log(error.response)
