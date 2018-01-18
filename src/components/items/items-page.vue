@@ -7,7 +7,7 @@
       </ul>
     </nav>
     <h2 class="title is-2">Items</h2>
-    <items-list :items="items" />
+    <items-list :items="items" :isLoading="isLoading" />
     <button class="button is-primary">
       <span><i class="fa fa-plus"></i></span >
       <span>Add Item</span>
@@ -26,6 +26,9 @@ export default {
   computed: {
     items() {
       return this.$store.getters.getItems
+    },
+    isLoading() {
+      return this.$store.getters.isLoading
     }
   },
   created(){
