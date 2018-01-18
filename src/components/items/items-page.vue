@@ -8,20 +8,23 @@
     </nav>
     <h2 class="title is-2">Items</h2>
     <items-list :items="items" :isLoading="isLoading" />
-    <button class="button is-primary">
+    <button class="button is-primary" @click="addItem">
       <span><i class="fa fa-plus"></i></span >
       <span>Add Item</span>
     </button>
+    <item-form :showForm="showForm" v-on:hideForm="hideForm"></item-form>
   </div>    
 </template>
 
 <script>
 import itemsList from './items-list'
+import itemForm from './item-form'
 
 export default {
   name: 'items-page',
   components: {
-    itemsList
+    itemsList,
+    itemForm
   },
   computed: {
     items() {
@@ -29,6 +32,17 @@ export default {
     },
     isLoading() {
       return this.$store.getters.isLoading
+    },
+    showForm() {
+      return this.$store.getters.showItemForm
+    }
+  },
+  methods: {
+    addItem() {
+      this.$store.dispatch("SHOW_ITEM_FORM")
+    },
+    hideForm() {
+      this.$store.dispatch("HIDE_ITEM_FORM")
     }
   },
   created(){

@@ -6,7 +6,8 @@ let api = new HttpApi('items')
 export default {
   state: {
     items: [],
-    loading: false
+    loading: false,
+    showForm: false
   },
   getters: {
     getItems(state) {
@@ -14,6 +15,9 @@ export default {
     },
     isLoading(state) {
       return state.loading
+    },
+    showItemForm(state) {
+      return state.showForm
     }
   },
   mutations: {
@@ -26,7 +30,10 @@ export default {
     REMOVE_ITEM(state, itemId) {
       var removeIndex = state.items.map(function(item) { return item.id; }).indexOf(itemId);
       state.items.splice(removeIndex, 1);
-    }
+    },
+    SET_FORM_VISIBLE(state, visible) {
+      state.showForm = visible
+    } 
   },
   actions: {
     FETCH_ITEMS({commit}) {
@@ -44,6 +51,12 @@ export default {
       }).catch((error) =>{
         console.log(error.response)
       })
+    },
+    SHOW_ITEM_FORM({commit}) {
+      commit('SET_FORM_VISIBLE', true)
+    },
+    HIDE_ITEM_FORM({commit}) {
+      commit('SET_FORM_VISIBLE', false)
     }
   }
 }
