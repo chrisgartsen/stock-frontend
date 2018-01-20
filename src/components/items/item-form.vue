@@ -64,6 +64,7 @@ export default {
   },
   methods: {
     closeForm() {
+      this.$v.$reset()
       this.$emit('hideForm')
     },
     saveItem() {
