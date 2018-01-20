@@ -67,9 +67,11 @@ export default {
       this.$emit('hideForm')
     },
     saveItem() {
-
+      this.$v.$touch()
       console.log(this.$v)
-      this.closeForm()
+      if(!this.$v.$error) {
+        this.closeForm()
+      }
     }
   }
 }
