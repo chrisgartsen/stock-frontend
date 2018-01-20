@@ -12,12 +12,15 @@
 
           <div class="field is-horizontal">
             <div class="field-label">
-              <label class="label" for="name">Name</label>
+              <label class="label" for="name">Name *</label>
             </div>
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <input type="text" id="name" class="input" v-model="name" @input="$v.name.$touch()">
+                  <input type="text" id="name" class="input" :class="{'is-danger' : $v.name.$error} " v-model="name" @input="$v.name.$touch()">
+                </div>
+                <div v-if="$v.name.$error" class="help is-danger">
+                  <span v-if="!$v.name.required">Name is required</span>
                 </div>
               </div>
             </div>
@@ -44,6 +47,10 @@ export default {
       required: true,
       type: Boolean
     }
+  },
+  computed: {
+
+
   },
   data() {
     return {
