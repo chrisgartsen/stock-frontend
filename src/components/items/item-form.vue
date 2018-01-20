@@ -17,7 +17,7 @@
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <input type="text" id="name" class="input">
+                  <input type="text" id="name" class="input" v-model="name" @input="$v.name.$touch()">
                 </div>
               </div>
             </div>
@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import { required } from 'vuelidate/lib/validators'
+
 export default {
   name: 'item-form',
   props: {
@@ -43,11 +45,23 @@ export default {
       type: Boolean
     }
   },
+  data() {
+    return {
+      name: ''
+    }
+  },
+  validations: {
+    name: {
+      required
+    }
+  },
   methods: {
     closeForm() {
       this.$emit('hideForm')
     },
     saveItem() {
+
+      console.log(this.$v)
       this.closeForm()
     }
   }

@@ -7,6 +7,10 @@ import store from './store'
 import 'font-awesome/css/font-awesome.css'
 import './assets/sass/main.scss'
 
+// Validation
+import Vuelidate from 'vuelidate'
+
+Vue.use(Vuelidate)
 
 Vue.config.productionTip = false
 
