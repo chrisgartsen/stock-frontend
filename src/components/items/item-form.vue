@@ -7,6 +7,23 @@
         <button class="delete" aria-label="close" @click="closeForm"></button>
       </header>
       <section class="modal-card-body">
+
+        <form v-on:submit.prevent="saveItem">
+
+          <div class="field is-horizontal">
+            <div class="field-label">
+              <label class="label" for="name">Name</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <input type="text" id="name" class="input">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
         <!-- Content ... -->
       </section>
       <footer class="modal-card-foot">
