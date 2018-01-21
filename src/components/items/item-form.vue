@@ -37,7 +37,7 @@
                 </div>
                 <ul v-if="$v.quantity.$error" class="help is-danger">
                   <li v-if="!$v.quantity.required">Quantity is required</li>
-                  <li v-if="!$v.quantity.numeric">Quantity is must be a number</li>
+                  <li v-if="!$v.quantity.numeric">Quantity must be a number</li>
                 </ul>
               </div>
             </div>
@@ -54,12 +54,12 @@
                 </div>
                 <ul v-if="$v.minimum_quantity.$error" class="help is-danger">
                   <li v-if="!$v.minimum_quantity.required">Minimum quantity is required</li>
-                  <li v-if="!$v.minimum_quantity.numeric">Minimum quantity is must be a number</li>
+                  <li v-if="!$v.minimum_quantity.numeric">Minimum quantity must be a number</li>
                 </ul>
               </div>
             </div>
           </div>
-
+          <span class="help">Fields marked with * are required.</span>
         </form>
 
         <!-- Content ... -->
