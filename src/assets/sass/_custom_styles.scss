@@ -26,6 +26,14 @@ main {
   }
 }
 
+.field-label {
+  min-width: 200px;
+}
+
+.is-small-width {
+  width: 40px;
+}
+
 button {
   .fa {
     margin-right: 5px;

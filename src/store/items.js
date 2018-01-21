@@ -24,6 +24,9 @@ export default {
     SET_ITEMS(state, items) {
       state.items = items
     },
+    ADD_ITEM(state, item) {
+      state.items.push(item)
+    },
     SET_LOADING_STATE(state, loading) {
       state.loading = loading
     },
@@ -57,6 +60,13 @@ export default {
     },
     HIDE_ITEM_FORM({commit}) {
       commit('SET_FORM_VISIBLE', false)
+    },
+    CREATE_ITEM({commit}, item) {
+      api.create(item).then((response) => {
+        commit('ADD_ITEM', response.data)
+      }).catch((error) =>{
+        console.log(error.response)
+      })
     }
   }
 }
