@@ -26,24 +26,15 @@
             </div>
           </div>
 
-          <div class="field is-horizontal">
-            <div class="field-label">
-              <label for="minimum_quantity" class="label">Minimum quantity *</label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <div class="control">
-                  <input type="text" id="minimum_quantity" class="input is-small-number" :class="{'is-danger': $v.minimum_quantity.$error}" v-model="minimum_quantity" @input="$v.minimum_quantity.$touch()">
-                </div>
-                <ul v-if="$v.minimum_quantity.$error" class="help is-danger">
-                  <li v-if="!$v.minimum_quantity.required">Minimum quantity is required</li>
-                  <li v-if="!$v.minimum_quantity.numeric">Minimum quantity must be a number</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <quantity-inputfield fieldName="quantity" 
+                               fieldLabel="Quantity *" 
+                               :value="quantity"
+                               @changeValue="updateQuantity"/>
 
-          <quantity-inputfield fieldName="quantity" fieldLabel = "Quantity *" :value="quantity" @changeValue="updateQuantity"/>
+          <quantity-inputfield fieldName="minimumQuantity" 
+                               fieldLabel="Minimum Quantity *" 
+                               :value="minimum_quantity"
+                               @changeValue="updateMinimumQuantity"/>
 
           <span class="help">Fields marked with * are required.</span>
         </form>
@@ -111,7 +102,14 @@ export default {
       }
     },
     updateQuantity(newValue) {
-      this.quantity = newValue
+      if(newValue >= 0 ) {
+        this.quantity = newValue
+      }
+    },
+    updateMinimumQuantity(newValue) {
+      if(newValue >= 0 ) {
+        this.minimum_quantity = newValue
+      }
     }
   }
 }

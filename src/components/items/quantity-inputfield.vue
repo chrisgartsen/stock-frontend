@@ -9,7 +9,7 @@
           <a class="button is-primary" @click="increment"><i class="fa fa-plus"></i></a>
         </div>
         <div class="control">
-          <input type="text" :id="fieldName" class="input is-small-number" v-model="value">
+          <input type="text" :id="fieldName" class="input is-small-number" v-model="value" @change="change">
         </div>
         <div class="control">
           <a class="button is-primary" @click="decrement"><i class="fa fa-minus"></i></a>
@@ -34,7 +34,7 @@ export default {
     value: {
       type: Number,
       required: true
-    }
+    },
   },
   methods: {
     increment() {
@@ -42,6 +42,9 @@ export default {
     },
     decrement() {
       this.$emit("changeValue", this.value-1)
+    },
+    change() {
+      console.log(this.value)
     }
   }
 }
