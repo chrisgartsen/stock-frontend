@@ -8,14 +8,20 @@
         <div class="control">
           <a class="button is-primary" @click="increment"><i class="fa fa-plus"></i></a>
         </div>
-        <div class="control">
-          <input type="text" :id="fieldName" class="input is-small-number" v-model="val" @change="change">
+        <div class="control"> 
+          <input type="text" :id="fieldName" class="input is-small-number" 
+                             :class="{'is-danger': v.$error}" 
+                             v-model="val" @change="change">
         </div>
         <div class="control">
           <a class="button is-primary" @click="decrement"><i class="fa fa-minus"></i></a>
         </div>
       </div>
     </div>
+      <div class="control" v-if="v.$error">
+        <span v-if="!v.required" class="help is-danger">{{ fieldLabel }} is required</span>
+        <span v-if="!v.numeric" class="help is-danger">{{ fieldLabel }} must be numeric</span>
+      </div>
   </div>
 </template>
 
@@ -34,11 +40,10 @@ export default {
     value: {
       required: true
     },
+    v: {
+      required: true
+    }
   },
-  validate: {
-
-  },
-  
   data() {
     return {
       val : this.value
@@ -46,17 +51,23 @@ export default {
   },
   methods: {
     increment() {
-      this.$emit("changeValue", this.val+1)
+      this.val = this.val + 1
+      this.$emit("changeValue", this.val)
     },
     decrement() {
-      this.$emit("changeValue", this.val-1)
+      if(this.val > 0) {
+        this.val = this.val - 1
+      }
+      this.$emit("changeValue", this.val)
     },
     change() {
+      this.v.$touch()
       this.$emit("changeValue", this.val)
     }
   },
   watch: {
     value(newVal) {
+      this.v.$touch()
       this.val = newVal
     }
   }

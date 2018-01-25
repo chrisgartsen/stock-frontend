@@ -17,7 +17,8 @@
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <input type="text" id="name" class="input" :class="{'is-danger': $v.name.$error}" v-model="name" @input="$v.name.$touch()">
+                  <input type="text" id="name" 
+                         class="input" :class="{'is-danger': $v.name.$error}" v-model="name" @input="$v.name.$touch()">
                 </div>
                 <div v-if="$v.name.$error" class="help is-danger">
                   <span v-if="!$v.name.required">Name is required</span>
@@ -29,11 +30,13 @@
           <quantity-inputfield fieldName="quantity" 
                                fieldLabel="Quantity *" 
                                :value="quantity"
+                               :v="$v.quantity"
                                @changeValue="updateQuantity"/>
 
           <quantity-inputfield fieldName="minimumQuantity" 
                                fieldLabel="Minimum Quantity *" 
                                :value="minimum_quantity"
+                               :v="$v.minimum_quantity"
                                @changeValue="updateMinimumQuantity"/>
 
           <span class="help">Fields marked with * are required.</span>
@@ -102,14 +105,10 @@ export default {
       }
     },
     updateQuantity(newValue) {
-      if(newValue >= 0 ) {
-        this.quantity = newValue
-      }
+      this.quantity = newValue
     },
     updateMinimumQuantity(newValue) {
-      if(newValue >= 0 ) {
-        this.minimum_quantity = newValue
-      }
+      this.minimum_quantity = newValue
     }
   }
 }
