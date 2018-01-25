@@ -98,7 +98,6 @@ export default {
     },
     saveItem() {
       this.$v.$touch()
-      console.log(this.$v)
       if(!this.$v.$error) {
         this.$store.dispatch('CREATE_ITEM', {name: this.name, quantity: this.quantity, minimum_quantity: this.minimum_quantity})
         this.closeForm()
