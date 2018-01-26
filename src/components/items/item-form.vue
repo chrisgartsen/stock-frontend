@@ -10,22 +10,11 @@
 
         <form v-on:submit.prevent="saveItem">
 
-          <div class="field is-horizontal">
-            <div class="field-label">
-              <label class="label" for="name">Name *</label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <div class="control">
-                  <input type="text" id="name" 
-                         class="input" :class="{'is-danger': $v.name.$error}" v-model="name" @input="$v.name.$touch()">
-                </div>
-                <div v-if="$v.name.$error" class="help is-danger">
-                  <span v-if="!$v.name.required">Name is required</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <text-inputfield fieldName="name"
+                           fieldLabel = "Name *"
+                           :value="name"
+                           :v="$v.name"
+                           @changeValue="updateName"/>
 
           <quantity-inputfield fieldName="quantity" 
                                fieldLabel="Quantity *" 
@@ -40,9 +29,9 @@
                                @changeValue="updateMinimumQuantity"/>
 
           <span class="help">Fields marked with * are required.</span>
+        
         </form>
 
-        <!-- Content ... -->
       </section>
       <footer class="modal-card-foot">
         <button class="button is-primary" @click="saveItem">Save changes</button>
@@ -56,6 +45,7 @@
 import { required, numeric } from 'vuelidate/lib/validators'
 
 import quantityInputfield from './quantity-inputfield'
+import textInputfield from './text-inputfield'
 
 export default {
   name: 'item-form',
@@ -66,7 +56,8 @@ export default {
     }
   },
   components: {
-    quantityInputfield
+    quantityInputfield,
+    textInputfield
   },
   data() {
     return {
@@ -108,6 +99,9 @@ export default {
     },
     updateMinimumQuantity(newValue) {
       this.minimum_quantity = newValue
+    },
+    updateName(newValue) {
+      this.name = newValue
     }
   }
 }

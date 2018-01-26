@@ -41,6 +41,7 @@ export default {
       required: true
     },
     v: {
+      type: Object,
       required: true
     }
   },
