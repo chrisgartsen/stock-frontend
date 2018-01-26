@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     addItem() {
-      this.$store.dispatch("SHOW_ITEM_FORM")
+      this.$store.dispatch("SHOW_NEW_ITEM_FORM")
     },
     hideForm() {
       this.$store.dispatch("HIDE_ITEM_FORM")

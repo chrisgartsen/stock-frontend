@@ -22,6 +22,16 @@ class HttpApi {
       })
     })
   }
+
+  get(id) {
+    return new Promise((resolve, reject) => {
+      Axios.get(this.getUrl() + '/' + id).then((response) => {
+        resolve(response)
+      }).catch((error)=> {
+        reject(error)
+      })
+    })
+  }
   
   create(item) {
     return new Promise((resolve, reject) => {
@@ -33,6 +43,16 @@ class HttpApi {
     })
   }
   
+  update(item) {
+    return new Promise((resolve, reject) => {
+      Axios.put(this.getUrl() + '/' + item.id, item).then((response) => {
+        resolve(response)
+      }).catch((error)=> {
+        reject(error)
+      })
+    })
+  }
+
   delete(id) {
     return new Promise((resolve, reject) => {
       Axios.delete(this.getUrl() + '/' + id).then((response) => {

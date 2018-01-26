@@ -3,7 +3,8 @@
     <div class="modal-background" @click="closeForm"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Add Item</p>
+        <p v-if="isEditMode" class="modal-card-title">Edit Item</p>
+        <p v-else class="modal-card-title">Add Item</p>
         <button class="delete" aria-label="close" @click="closeForm"></button>
       </header>
       <section class="modal-card-body">
@@ -12,20 +13,20 @@
 
           <text-inputfield fieldName="name"
                            fieldLabel = "Name *"
-                           :value="name"
-                           :v="$v.name"
+                           :value="item.name"
+                           :v="$v.item.name"
                            @changeValue="updateName"/>
 
           <quantity-inputfield fieldName="quantity" 
                                fieldLabel="Quantity *" 
-                               :value="quantity"
-                               :v="$v.quantity"
+                               :value="item.quantity"
+                               :v="$v.item.quantity"
                                @changeValue="updateQuantity"/>
 
           <quantity-inputfield fieldName="minimumQuantity" 
                                fieldLabel="Minimum Quantity *" 
-                               :value="minimum_quantity"
-                               :v="$v.minimum_quantity"
+                               :value="item.minimum_quantity"
+                               :v="$v.item.minimum_quantity"
                                @changeValue="updateMinimumQuantity"/>
 
           <span class="help">Fields marked with * are required.</span>
@@ -59,49 +60,80 @@ export default {
     quantityInputfield,
     textInputfield
   },
+  computed: {
+    isEditMode() {
+      return this.$store.getters.isEditMode
+    }
+  },
   data() {
     return {
-      name: '',
-      quantity: 0,
-      minimum_quantity: 0
+      item: {
+        id: 0,
+        name: '',
+        quantity: 0,
+        minimum_quantity: 0
+      },
     }
   },
   validations: {
-    name: {
-      required
-    },
-    quantity: {
-      required,
-      numeric
-    },
-    minimum_quantity: {
-      required,
-      numeric
+    item: {
+      name: {
+        required
+      },
+      quantity: {
+        required,
+        numeric
+      },
+      minimum_quantity: {
+        required,
+        numeric
+      }
     }
   },
   methods: {
     closeForm() {
-      this.name = ''
-      this.quantity = 0
-      this.minimum_quantity = 0
+      this.item.id = 0
+      this.item.name = ''
+      this.item.quantity = 0
+      this.item.minimum_quantity = 0
       this.$v.$reset()
       this.$emit('hideForm')
     },
     saveItem() {
       this.$v.$touch()
       if(!this.$v.$error) {
-        this.$store.dispatch('CREATE_ITEM', {name: this.name, quantity: this.quantity, minimum_quantity: this.minimum_quantity})
+        if(this.$store.getters.isEditMode) {
+          this.$store.dispatch('UPDATE_ITEM', {
+            id: this.item.id,
+            name: this.item.name, 
+            quantity: this.item.quantity, 
+            minimum_quantity: this.item.minimum_quantity
+          })
+        } else {
+          this.$store.dispatch('CREATE_ITEM', {
+            name: this.item.name, 
+            quantity: this.item.quantity, 
+            minimum_quantity: this.item.minimum_quantity
+          })
+        }  
         this.closeForm()
       }
     },
     updateQuantity(newValue) {
-      this.quantity = newValue
+      this.item.quantity = newValue
     },
     updateMinimumQuantity(newValue) {
-      this.minimum_quantity = newValue
+      this.item.minimum_quantity = newValue
     },
     updateName(newValue) {
-      this.name = newValue
+      this.item.name = newValue
+    }
+  },
+  watch: {
+    isEditMode() {
+      if(this.$store.getters.isEditMode) {
+        this.item = this.$store.getters.getItem
+      }
     }
   }
 }

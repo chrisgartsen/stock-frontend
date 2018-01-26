@@ -50,13 +50,13 @@ export default {
   },
   methods: {
     change() {
-      this.v.$touch()
+      //this.v.$touch()
       this.$emit("changeValue", this.val)
     }
   },
   watch: {
     value(newVal) {
-      this.v.$touch()
+     // this.v.$touch()
       this.val = newVal
     }
   }
