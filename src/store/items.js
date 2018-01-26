@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import Vue from 'vue'
 import HttpApi from './../resource/HttpApi'
 
 let api = new HttpApi('items')
@@ -42,7 +43,8 @@ export default {
       state.items.push(item)
     },
     UPDATE_ITEM(state, item) {
-
+      var updateIndex = state.items.map(function(item) { return item.id; }).indexOf(item.id);
+      Vue.set(state.items, updateIndex, item)
     },
     SET_LOADING_STATE(state, loading) {
       state.loading = loading
