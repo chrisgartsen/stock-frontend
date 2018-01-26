@@ -11,7 +11,7 @@
                  :id="fieldName" 
                  class="input" 
                  :class="{'is-danger': v.$error}" 
-                 v-model="val" @change="change">
+                 v-model="val" @change="change" @blur="v.$touch()">
         </div>
         <div class="control" v-if="v.$error">
           <span class="help is-danger" v-if="!v.required">{{ fieldLabel }} is required</span>
@@ -50,11 +50,13 @@ export default {
   },
   methods: {
     change() {
+      this.v.$touch()
       this.$emit("changeValue", this.val)
     }
   },
   watch: {
     value(newVal) {
+      this.v.$touch()
       this.val = newVal
     }
   }
