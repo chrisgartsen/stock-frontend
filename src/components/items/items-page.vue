@@ -24,8 +24,8 @@
         <item-form :showForm="showForm" v-on:hideForm="hideForm"></item-form>
         <icon-button label="Add Item" @buttonClick="addItem"/>
       </div>
-      <div class="column is-2 is-offset-1 rb">
-        Grocerylist
+      <div class="column is-2 is-offset-1">
+        <grocery-list/>
       </div>
     </div>
   </div>
@@ -35,13 +35,15 @@
 import itemsList from './items-list'
 import itemForm from './item-form'
 import iconButton from './icon-button'
+import groceryList from './grocery-list'
 
 export default {
   name: 'items-page',
   components: {
     itemsList,
     itemForm,
-    iconButton
+    iconButton,
+    groceryList
   },
   computed: {
     items() {

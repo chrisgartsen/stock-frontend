@@ -16,6 +16,22 @@ export default {
     getItems(state) {
       return state.items
     },
+    getItemsMissingAndLow(state) {
+      return state.items.filter((item) => {
+        return item.minimum_quantity > 0 && 
+                (item.quantity == item.minimum_quantity || item.quantity < item.minimum_quantity)
+      })
+    },
+    getItemsLow(state) {
+      return state.items.filter((item) => {
+        return item.minimum_quantity > 0 && item.quantity == item.minimum_quantity
+      })
+    },
+    getItemsMissing(state) {
+      return state.items.filter((item) => {
+        return item.minimum_quantity > 0 && item.quantity < item.minimum_quantity
+      })
+    },
     getItem(state) {
       return state.item
     },
