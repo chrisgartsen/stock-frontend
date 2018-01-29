@@ -18,7 +18,7 @@ export default {
     },
     getItemsMissingAndLow(state) {
       return state.items.filter((item) => {
-        return item.minimum_quantity > 0 && 
+        return item.minimum_quantity > 0 &&   
                 (item.quantity == item.minimum_quantity || item.quantity < item.minimum_quantity)
       })
     },
@@ -111,7 +111,7 @@ export default {
     },
     HIDE_ITEM_FORM({commit}) {
       commit('SET_EDIT_MODE', false)
-      commit('SET_ITEM_ID',0)
+      commit('SET_ITEM_ID',0), 
       commit('SET_FORM_VISIBLE', false)
     },
     CREATE_ITEM({commit}, item) {
@@ -127,7 +127,6 @@ export default {
       }).catch((error) =>{
         console.log(error.response)
       })
-      console.log('Updating', item)
-    }
+    },
   }
 }
