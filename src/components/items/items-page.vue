@@ -34,7 +34,7 @@
 <script>
 import itemsList from './items-list'
 import itemForm from './item-form'
-import iconButton from './icon-button'
+import iconButton from '@/components/shared/icon-button'
 import groceryList from './grocery-list'
 
 export default {

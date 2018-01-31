@@ -45,8 +45,8 @@
 <script>
 import { required, numeric } from 'vuelidate/lib/validators'
 
-import quantityInputfield from './quantity-inputfield'
-import textInputfield from './text-inputfield'
+import quantityInputfield from '@/components/shared/quantity-inputfield'
+import textInputfield from '@/components/shared/text-inputfield'
 
 export default {
   name: 'item-form',
