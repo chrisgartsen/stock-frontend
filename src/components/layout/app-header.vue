@@ -35,6 +35,7 @@
       <div class="container">
         <ul>
           <router-link :to="{name: 'items'}" tag="li" exact><a>Items</a></router-link>
+          <router-link :to="{name: 'users'}" tag="li"><a>Users</a></router-link>
         </ul>
       </div>
     </nav>
