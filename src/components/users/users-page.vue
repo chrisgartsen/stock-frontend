@@ -18,11 +18,31 @@
       </div>
     </div>
 
+    <div class="columns">
+      <div class="column is-6 is-offset-2">
+        <users-list :users="users" :isLoading="isLoading"/>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
+import usersList from '@/components/users/users-list'
+
 export default {
-  name: 'users-page'
+  name: 'users-page',
+  components: {
+    usersList
+  },
+  computed: {
+    users() {
+      return this.$store.getters.getItems
+    },
+    isLoading() {
+      return false
+    }
+  }
+
 }
 </script>
