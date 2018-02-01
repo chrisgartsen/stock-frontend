@@ -1,6 +1,5 @@
-import Axios from 'axios'
 import Vue from 'vue'
-import HttpApi from './../resource/HttpApi'
+import HttpApi from './../resource/http-api'
 
 let api = new HttpApi('items')
 
@@ -35,13 +34,13 @@ export default {
     getItem(state) {
       return state.item
     },
-    isLoading(state) {
+    isLoadingItems(state) {
       return state.loading
     },
     showItemForm(state) {
       return state.showForm
     },
-    isEditMode(state) {
+    isEditItemMode(state) {
       return state.editMode
     },
     editItemId(state) {
@@ -62,10 +61,10 @@ export default {
       var updateIndex = state.items.map(function(item) { return item.id; }).indexOf(item.id);
       Vue.set(state.items, updateIndex, item)
     },
-    SET_LOADING_STATE(state, loading) {
+    SET_ITEMS_LOADING_STATE(state, loading) {
       state.loading = loading
     },
-    SET_EDIT_MODE(state, editMode) {
+    SET_ITEM_EDIT_MODE(state, editMode) {
       state.editMode = editMode
     },
     SET_ITEM_ID(state, id) {
@@ -75,16 +74,16 @@ export default {
       var removeIndex = state.items.map(function(item) { return item.id; }).indexOf(itemId);
       state.items.splice(removeIndex, 1);
     },
-    SET_FORM_VISIBLE(state, visible) {
+    SET_ITEM_FORM_VISIBLE(state, visible) {
       state.showForm = visible
     } 
   },
   actions: {
     FETCH_ITEMS({commit}) {
-      commit("SET_LOADING_STATE", true)
+      commit("SET_ITEMS_LOADING_STATE", true)
       api.getAll().then((response) => {
         commit("SET_ITEMS", response.data)
-        commit("SET_LOADING_STATE", false)
+        commit("SET_ITEMS_LOADING_STATE", false)
       }).catch((error)=> {
         console.log(error.response.data)
       })
@@ -97,22 +96,22 @@ export default {
       })
     },
     SHOW_NEW_ITEM_FORM({commit}) {
-      commit('SET_FORM_VISIBLE', true)
+      commit('SET_ITEM_FORM_VISIBLE', true)
     },
     SHOW_EDIT_ITEM_FORM({commit, dispatch}, itemId) {
       api.get(itemId).then((response) =>{
-        commit('SET_EDIT_MODE', true)
+        commit('SET_ITEM_EDIT_MODE', true)
         commit('SET_ITEM', response.data)
-        commit('SET_FORM_VISIBLE', true)      
+        commit('SET_ITEM_FORM_VISIBLE', true)      
       }).catch((error) => {
         console.log(error)
         reject(error)
       })
     },
     HIDE_ITEM_FORM({commit}) {
-      commit('SET_EDIT_MODE', false)
+      commit('SET_ITEM_EDIT_MODE', false)
       commit('SET_ITEM_ID',0), 
-      commit('SET_FORM_VISIBLE', false)
+      commit('SET_ITEM_FORM_VISIBLE', false)
     },
     CREATE_ITEM({commit}, item) {
       api.create(item).then((response) => {

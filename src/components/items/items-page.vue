@@ -50,7 +50,7 @@ export default {
       return this.$store.getters.getItems
     },
     isLoading() {
-      return this.$store.getters.isLoading
+      return this.$store.getters.isLoadingItems
     },
     showForm() {
       return this.$store.getters.showItemForm

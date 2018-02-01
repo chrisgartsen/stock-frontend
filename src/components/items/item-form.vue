@@ -62,7 +62,7 @@ export default {
   },
   computed: {
     isEditMode() {
-      return this.$store.getters.isEditMode
+      return this.$store.getters.isEditItemMode
     }
   },
   data() {
@@ -131,7 +131,7 @@ export default {
   },
   watch: {
     isEditMode() {
-      if(this.$store.getters.isEditMode) {
+      if(this.$store.getters.isEditItemMode) {
         this.item = this.$store.getters.getItem
       }
     }
