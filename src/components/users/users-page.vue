@@ -19,7 +19,7 @@
     </div>
 
     <div class="columns">
-      <div class="column is-6 is-offset-2">
+      <div class="column is-8 is-offset-2">
         <users-list :users="users" :isLoading="isLoading"/>
       </div>
     </div>
@@ -30,6 +30,7 @@
 <script>
 import usersList from '@/components/users/users-list'
 
+
 export default {
   name: 'users-page',
   components: {
@@ -37,12 +38,14 @@ export default {
   },
   computed: {
     users() {
-      return this.$store.getters.getItems
+      return this.$store.getters.getUsers
     },
     isLoading() {
-      return false
+      return this.$store.getters.isUsersLoading
     }
+  },
+  created() {
+    this.$store.dispatch("FETCH_USERS")
   }
-
 }
 </script>
