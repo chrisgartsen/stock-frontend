@@ -14,27 +14,21 @@
         </tr>    
       </thead>
       <tbody>
-        <tr v-for="user in users" :key="user.id">
-          <td>{{user.name}}</td>
-          <td>{{user.email}}</td>
-          <td>{{user.active}}</td>
-          <td>{{user.admin}}</td>
-          <td>{{user.created_at}}</td>
-          <td>{{user.updated_at}}</td>
-          <td></td>
-        </tr>
+        <tr v-for="user in users" :key="user.id" is="users-row" :user="user"></tr>
       </tbody>
     </table>
   </div>
 </template>
 
 <script>
-import loader from 'vue-spinner/src/ClipLoader.vue'
+import loader from 'vue-spinner/src/ClipLoader'
+import usersRow from './users-row'
 
 export default {
   name: 'users-list',
   components: {
-    loader
+    loader,
+    usersRow
   },
   props: {
     users: {
