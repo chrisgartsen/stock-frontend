@@ -51,7 +51,7 @@ export default {
   methods: {
     change() {
       //this.v.$touch()
-      this.$emit("changeValue", this.val)
+      this.$emit("changeValue", this.fieldName, this.val)
     }
   },
   watch: {

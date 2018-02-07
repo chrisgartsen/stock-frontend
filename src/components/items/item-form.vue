@@ -15,19 +15,19 @@
                            fieldLabel = "Name *"
                            :value="item.name"
                            :v="$v.item.name"
-                           @changeValue="updateName"/>
+                           @changeValue="updateField"/>
 
           <quantity-inputfield fieldName="quantity" 
                                fieldLabel="Quantity *" 
                                :value="item.quantity"
                                :v="$v.item.quantity"
-                               @changeValue="updateQuantity"/>
+                               @changeValue="updateField"/>
 
-          <quantity-inputfield fieldName="minimumQuantity" 
+          <quantity-inputfield fieldName="minimum_quantity" 
                                fieldLabel="Minimum Quantity *" 
                                :value="item.minimum_quantity"
                                :v="$v.item.minimum_quantity"
-                               @changeValue="updateMinimumQuantity"/>
+                               @changeValue="updateField"/>
 
           <span class="help">Fields marked with * are required.</span>
         
@@ -106,15 +106,9 @@ export default {
         this.closeForm()
       }
     },
-    updateQuantity(newValue) {
-      this.item.quantity = newValue
+    updateField(fieldName,newValue) {
+      this.item[fieldName] = newValue
     },
-    updateMinimumQuantity(newValue) {
-      this.item.minimum_quantity = newValue
-    },
-    updateName(newValue) {
-      this.item.name = newValue
-    }
   },
   watch: {
     isEditMode() {

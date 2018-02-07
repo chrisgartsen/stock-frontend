@@ -53,17 +53,17 @@ export default {
   methods: {
     increment() {
       this.val = this.val + 1
-      this.$emit("changeValue", this.val)
+      this.$emit("changeValue", this.fieldName, this.val)
     },
     decrement() {
       if(this.val > 0) {
         this.val = this.val - 1
       }
-      this.$emit("changeValue", this.val)
+      this.$emit("changeValue", this.fieldName, this.val)
     },
     change() {
       this.v.$touch()
-      this.$emit("changeValue", this.val)
+      this.$emit("changeValue", this.fieldName, this.val)
     }
   },
   watch: {
