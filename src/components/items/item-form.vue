@@ -102,20 +102,7 @@ export default {
     saveItem() {
       this.$v.$touch()
       if(!this.$v.$error) {
-        if(this.$store.getters.isEditMode) {
-          this.$store.dispatch('UPDATE_ITEM', {
-            id: this.item.id,
-            name: this.item.name, 
-            quantity: this.item.quantity, 
-            minimum_quantity: this.item.minimum_quantity
-          })
-        } else {
-          this.$store.dispatch('CREATE_ITEM', {
-            name: this.item.name, 
-            quantity: this.item.quantity, 
-            minimum_quantity: this.item.minimum_quantity
-          })
-        }  
+        this.$store.dispatch("PROCESS_ITEM", this.item)
         this.closeForm()
       }
     },

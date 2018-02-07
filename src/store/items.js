@@ -127,5 +127,21 @@ export default {
         console.log(error.response)
       })
     },
+    PROCESS_ITEM(context, item) {
+      if(context.getters.isEditItemMode) {
+        context.dispatch('UPDATE_ITEM', {
+          id: item.id,
+          name: item.name, 
+          quantity: item.quantity, 
+          minimum_quantity: item.minimum_quantity
+        })
+      } else {
+        context.dispatch('CREATE_ITEM', {
+          name: item.name, 
+          quantity: item.quantity, 
+          minimum_quantity: item.minimum_quantity
+        })
+      } 
+    }
   }
 }
