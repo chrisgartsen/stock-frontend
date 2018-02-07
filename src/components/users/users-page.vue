@@ -46,6 +46,7 @@
 
 <script>
 import usersList from '@/components/users/users-list'
+import userForm from '@/components/users/user-form'
 import iconButton from '@/components/shared/icon-button'
 
 export default {
