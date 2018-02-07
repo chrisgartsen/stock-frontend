@@ -6,7 +6,8 @@ export default {
 
   state: {
     users: [],
-    loading: false
+    loading: false,
+    showForm: false
   },
 
   getters: {
@@ -15,6 +16,9 @@ export default {
     },
     isUsersLoading(state) {
       return state.loading
+    },
+    showUserForm(state) {
+      return state.showForm
     }
   },
 
@@ -24,6 +28,9 @@ export default {
     },
     SET_USERS(state, users) {
       state.users = users
+    },
+    SET_USER_FORM_VISIBLE(state, visible) {
+      state.showForm = visible
     }
   },
 
@@ -34,7 +41,12 @@ export default {
         commit('SET_USERS', response.data)
         commit('SET_USERS_LOADING_STATE', false)
       })
+    },
+    SHOW_NEW_USER_FORM({commit}) {
+      commit("SET_USER_FORM_VISIBLE",true)
+    },
+    HIDE_USER_FORM({commit}) {
+      commit("SET_USER_FORM_VISIBLE", false)
     }
   }
-
 }

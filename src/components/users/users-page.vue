@@ -21,6 +21,23 @@
     <div class="columns">
       <div class="column is-8 is-offset-2">
         <users-list :users="users" :isLoading="isLoading"/>
+        <icon-button label="Add User" @buttonClick="addUser"/>
+        <div class="modal" :class="{'is-active': showForm}">
+          <div class="modal-background" @click="closeForm"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Add User</p>
+              <button class="delete" @click="closeForm"></button>
+            </header>
+            <section class="modal-card-body">
+              Body
+            </section>
+            <footer class="modal-card-foot">
+              <button class="button is-primary" @click="saveUser">Create</button>
+              <button class="button" @click="closeForm">Cancel</button>
+            </footer>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -29,12 +46,13 @@
 
 <script>
 import usersList from '@/components/users/users-list'
-
+import iconButton from '@/components/shared/icon-button'
 
 export default {
   name: 'users-page',
   components: {
-    usersList
+    usersList,
+    iconButton
   },
   computed: {
     users() {
@@ -42,6 +60,20 @@ export default {
     },
     isLoading() {
       return this.$store.getters.isUsersLoading
+    },
+    showForm() {
+      return this.$store.getters.showUserForm
+    }
+  },
+  methods: {
+    addUser() {
+      this.$store.dispatch("SHOW_NEW_USER_FORM")
+    },
+    closeForm() {
+      this.$store.dispatch("HIDE_USER_FORM")
+    },
+    saveUser() {
+      console.log("SAVING")
     }
   },
   created() {

@@ -39,7 +39,7 @@
         <button class="button" @click="closeForm">Cancel</button>
       </footer>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
