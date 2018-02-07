@@ -7,8 +7,9 @@ import store from './store'
 import 'font-awesome/css/font-awesome.css'
 import './assets/sass/main.scss'
 
-// Validation
+// Utility libaries
 import Vuelidate from 'vuelidate'
+import dateFormat from './filters//date-format'
 
 Vue.use(Vuelidate)
 

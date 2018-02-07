@@ -4,8 +4,8 @@
     <td>{{user.email}}</td>
     <td>{{user.active}}</td>
     <td>{{user.admin}}</td>
-    <td>{{user.created_at}}</td>
-    <td>{{user.updated_at}}</td>
+    <td>{{user.created_at | dateFormat}}</td>
+    <td>{{user.updated_at | dateFormat}}</td>
     <td></td>
   </tr>
 </template>
