@@ -22,22 +22,7 @@
       <div class="column is-8 is-offset-2">
         <users-list :users="users" :isLoading="isLoading"/>
         <icon-button label="Add User" @buttonClick="addUser"/>
-        <div class="modal" :class="{'is-active': showForm}">
-          <div class="modal-background" @click="closeForm"></div>
-          <div class="modal-card">
-            <header class="modal-card-head">
-              <p class="modal-card-title">Add User</p>
-              <button class="delete" @click="closeForm"></button>
-            </header>
-            <section class="modal-card-body">
-              Body
-            </section>
-            <footer class="modal-card-foot">
-              <button class="button is-primary" @click="saveUser">Create</button>
-              <button class="button" @click="closeForm">Cancel</button>
-            </footer>
-          </div>
-        </div>
+        <user-form :showForm="showForm" v-on:hideForm="hideForm"></user-form>
       </div>
     </div>
 
@@ -53,6 +38,7 @@ export default {
   name: 'users-page',
   components: {
     usersList,
+    userForm,
     iconButton
   },
   computed: {
@@ -70,12 +56,9 @@ export default {
     addUser() {
       this.$store.dispatch("SHOW_NEW_USER_FORM")
     },
-    closeForm() {
+    hideForm() {
       this.$store.dispatch("HIDE_USER_FORM")
     },
-    saveUser() {
-      console.log("SAVING")
-    }
   },
   created() {
     this.$store.dispatch("FETCH_USERS")

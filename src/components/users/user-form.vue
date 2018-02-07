@@ -7,7 +7,11 @@
         <button class="delete" @click="closeForm"></button>
       </header>
       <section class="modal-card-body">
-        Body
+        <text-inputfield fieldName="name"
+                         fieldLabel = "Name *"
+                         :value="user.name"
+                         :v="$v.user.name"
+                         @changeValue="updateField"/>
       </section>
       <footer class="modal-card-foot">
         <button class="button is-primary" @click="saveUser">Create</button>
@@ -18,6 +22,9 @@
 </template>
 
 <script>
+import {required} from 'vuelidate/lib/validators'
+import textInputfield from '@/components/shared/text-inputfield'
+
 export default {
   name: 'user-form',
   props: {
@@ -26,9 +33,33 @@ export default {
       type: Boolean
     }
   },
+  components: {
+    textInputfield
+  },
+  data() {
+    return {
+      user: {
+        id: 0,
+        name: ''
+      }
+    }
+  },
+  validations: {
+    user: {
+      name: {
+        required
+      }
+    }
+  },
   methods: {
     closeForm() {
       this.$emit('hideForm')
+    },
+    updateField(fieldName, newValue) {
+      this.user[fieldName] = newValue
+    },
+    saveUser() {
+      console.log("SAVING")
     }
   }
 
