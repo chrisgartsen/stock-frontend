@@ -1,8 +1,29 @@
 <template>
   <div id="app">
-    <app-header/>
-    <app-content/>
-    <app-footer/>
+
+    <el-container>
+      <el-header>
+        <el-row>
+          <el-col :span="2" class="logo">
+            <h1>Stock</h1>
+          </el-col>
+          <el-col :span="22">
+        <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" :router="true">
+          <el-menu-item index="/" :route="{name: 'home'}">Home</el-menu-item>
+          <el-menu-item index="/items" :route="{name: 'items'}">Items</el-menu-item>
+          <el-menu-item index="/users" :route="{name: 'users'}">Users</el-menu-item>
+        </el-menu>  
+          </el-col>
+        </el-row>
+      </el-header>
+      <el-main>
+        <router-view/>
+      </el-main>
+      <el-footer height="100px">
+        <span>Stock @2018</span>
+      </el-footer>
+    </el-container>
+
   </div>
 </template>
 

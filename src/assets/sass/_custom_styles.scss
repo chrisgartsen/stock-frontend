@@ -1,17 +1,37 @@
-footer {
-  text-align: center;
-  color: $grey-dark;
-}
 
-#app {
+
+/* 
+ * Align footer to page bottom
+ */
+
+.el-container {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
 }
 
-main {
+.el-main {
   flex: 1;
 }
+
+/*
+ * Footer markup
+ */
+
+.el-footer {
+  background-color: $footer-background-color;
+  text-align: center;
+  color: $footer-text;
+  padding-top: 20px;
+  height: 160px;
+}
+
+.logo {
+  display: block;
+  height: 60px;
+}
+
+/*
 
 .hero-foot {
   .is-active {
@@ -46,3 +66,5 @@ table {
     color: $primary;
   }
 }
+
+*/

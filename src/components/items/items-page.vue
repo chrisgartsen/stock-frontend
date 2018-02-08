@@ -1,33 +1,35 @@
 <template>
   <div>
 
-    <div class="columns">
-      <div class="column is-10 is-offset-2">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-          <ul>
-            <li><a>Home</a></li>
-            <li class="is-active"><a href="#" aria-current="page">Items</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
+    <el-row>
+      <el-col :span="22" :offset="2">
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item :to="{ name: 'home' }">Home</el-breadcrumb-item>
+          <el-breadcrumb-item>Items</el-breadcrumb-item>
+        </el-breadcrumb>
+      </el-col>
+    </el-row>
+    <br/>
+    <br/>
+    <el-row>
+      <el-col :span="22" :offset="2">
+        <el-table :data="items">
+          <el-table-column prop="name" label="Name"></el-table-column>
+          <el-table-column prop="quantity" label="Quantity"></el-table-column>
+          <el-table-column prop="minimum_quantity" label="Minimum Quantity"></el-table-column>
+          <el-table-column label="" fixed="right">
+            <template slot-scope="scope">
+              <el-button type="primary" size="mini" plain>Edit</el-button>
+              <el-button type="danger" size="mini" plain>Delete</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <br/>
+        <el-button type="primary">Add Item</el-button>
 
-    <div class="columns">
-      <div class="column is-10 is-offset-2">
-        <h2 class="title is-2">Items</h2>
-      </div>
-    </div>
+      </el-col>
+    </el-row>
 
-    <div class="columns">
-      <div class="column is-6 is-offset-2">
-        <items-list :items="items" :isLoading="isLoading" />
-        <item-form :showForm="showForm" v-on:hideForm="hideForm"></item-form>
-        <icon-button label="Add Item" @buttonClick="addItem"/>
-      </div>
-      <div class="column is-2 is-offset-1">
-        <grocery-list/>
-      </div>
-    </div>
   </div>
 </template>
 

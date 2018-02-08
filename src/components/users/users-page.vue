@@ -1,5 +1,15 @@
 <template>
   <div>
+    <el-row>
+      <el-col :span="22" :offset="2">
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item :to="{ name: 'home' }">Home</el-breadcrumb-item>
+          <el-breadcrumb-item>Users</el-breadcrumb-item>
+        </el-breadcrumb>
+      </el-col>
+    </el-row>
+
+
 
     <div class="columns">
       <div class="column is-10 is-offset-2">
