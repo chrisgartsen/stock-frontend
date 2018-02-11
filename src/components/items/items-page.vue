@@ -25,7 +25,19 @@
           </el-table-column>
         </el-table>
         <br/>
-        <el-button type="primary">Add Item</el-button>
+        <el-button type="primary" @click="addItem">Add Item</el-button>
+       
+        <el-dialog title="Add Item" :visible.sync="formVisible" width="30%">
+          <el-form ref="form" :model="item" label-width="120px">
+            <el-form-item label="Name">
+              <el-input v-model="item.name"></el-input>
+            </el-form-item>
+          </el-form>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="hideForm">Cancel</el-button>
+            <el-button type="primary" @click="hideForm">Confirm</el-button>
+          </span>
+        </el-dialog>
 
       </el-col>
     </el-row>
@@ -47,6 +59,14 @@ export default {
     iconButton,
     groceryList
   },
+  data() {
+    return {
+      formVisible: false,
+      item: {
+        name: ''
+      }
+    }
+  },
   computed: {
     items() {
       return this.$store.getters.getItems
@@ -60,10 +80,12 @@ export default {
   },
   methods: {
     addItem() {
-      this.$store.dispatch("SHOW_NEW_ITEM_FORM")
+      this.formVisible = true
+      //this.$store.dispatch("SHOW_NEW_ITEM_FORM")
     },
     hideForm() {
-      this.$store.dispatch("HIDE_ITEM_FORM")
+      this.formVisible = false
+      //this.$store.dispatch("HIDE_ITEM_FORM")
     }
   },
   created(){
