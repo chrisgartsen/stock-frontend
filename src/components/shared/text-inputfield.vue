@@ -2,7 +2,7 @@
   
   <div class="field is-horizontal">
     <div class="field-label">
-      <label class="label" :for="fieldName">{{ fieldLabel }}</label>
+      <label class="label" :for="fieldName">{{ requiredLabel }}</label>
     </div>
     <div class="field-body">
       <div class="field">
@@ -38,9 +38,18 @@ export default {
       type: String,
       required: true
     },
+    requiredValue: {
+      type: Boolean,
+      default: false
+    },
     v: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    requiredLabel() {
+      return this.requiredValue ? this.fieldLabel + ' *' : this.fieldLabel
     }
   },
   data() {

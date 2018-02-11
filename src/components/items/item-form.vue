@@ -12,19 +12,20 @@
         <form v-on:submit.prevent="saveItem">
 
           <text-inputfield fieldName="name"
-                           fieldLabel = "Name *"
+                           fieldLabel = "Name"
+                           :requiredValue=true
                            :value="item.name"
                            :v="$v.item.name"
                            @changeValue="updateField"/>
 
           <quantity-inputfield fieldName="quantity" 
-                               fieldLabel="Quantity *" 
+                               fieldLabel="Quantity" 
                                :value="item.quantity"
                                :v="$v.item.quantity"
                                @changeValue="updateField"/>
 
           <quantity-inputfield fieldName="minimum_quantity" 
-                               fieldLabel="Minimum Quantity *" 
+                               fieldLabel="Minimum Quantity" 
                                :value="item.minimum_quantity"
                                :v="$v.item.minimum_quantity"
                                @changeValue="updateField"/>

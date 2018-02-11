@@ -6,7 +6,7 @@
     <div class="field-body">
       <div class="field has-addons">
         <div class="control">
-          <a class="button is-primary" @click="increment"><i class="fa fa-plus"></i></a>
+          <a class="button is-primary is-outlined" @click="increment"><i class="fa fa-plus"></i></a>
         </div>
         <div class="control"> 
           <input type="text" :id="fieldName" class="input is-small-number" 
@@ -14,7 +14,7 @@
                              v-model="val" @change="change">
         </div>
         <div class="control">
-          <a class="button is-primary" @click="decrement"><i class="fa fa-minus"></i></a>
+          <a class="button is-primary is-outlined" @click="decrement"><i class="fa fa-minus"></i></a>
         </div>
       </div>
     </div>
