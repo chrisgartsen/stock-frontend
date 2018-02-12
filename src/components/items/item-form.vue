@@ -12,7 +12,6 @@
         <form v-on:submit.prevent="saveItem">
 
           <text-inputfield fieldName="name"
-                           fieldLabel = "Name"
                            :requiredValue=true
                            :value="item.name"
                            :v="$v.item.name"
