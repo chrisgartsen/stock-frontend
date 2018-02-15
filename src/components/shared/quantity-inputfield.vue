@@ -41,7 +41,7 @@ export default {
     value: {
       required: true
     },
-    isRequired: {
+    required: {
       type: Boolean,
       default: false
     },

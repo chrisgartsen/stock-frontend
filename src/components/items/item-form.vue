@@ -12,7 +12,7 @@
         <form v-on:submit.prevent="saveItem" @keyup.enter="saveItem">
 
           <text-inputfield fieldName="name"
-                           :requiredValue=true
+                           :required=true
                            :value="item.name"
                            :v="$v.item.name"
                            @changeValue="updateField"/>

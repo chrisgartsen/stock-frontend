@@ -8,7 +8,7 @@
       </header>
       <section class="modal-card-body">
         <text-inputfield fieldName="name"
-                         fieldLabel = "Name *"
+                         :required=true
                          :value="user.name"
                          :v="$v.user.name"
                          @changeValue="updateField"/>

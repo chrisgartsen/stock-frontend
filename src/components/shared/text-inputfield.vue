@@ -39,7 +39,7 @@ export default {
       type: String,
       required: true
     },
-    requiredValue: {
+    required: {
       type: Boolean,
       default: false
     },
@@ -51,7 +51,7 @@ export default {
   computed: {
     label() {
       let val = this.fieldLabel || humanize(this.fieldName) 
-      return this.requiredValue ? val + ' *' : val
+      return this.required ? val + ' *' : val
     }
   },
   data() {
