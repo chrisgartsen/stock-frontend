@@ -1,7 +1,7 @@
 <template>
   <div class="field is-horizontal">
     <div class="field-label">
-      <label :for="fieldName" class="label">{{ fieldLabel }}</label>
+      <label :for="fieldName" class="label">{{ label }}</label>
     </div>
     <div class="field-body">
       <div class="field has-addons">
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import humanize from 'humanize-string'
+
 export default {
   name: 'quantity-inputfield',
   props: {
@@ -34,15 +36,24 @@ export default {
       required: true
     },
     fieldLabel: {
-      type: String,
-      default: this.fieldName
+      type: String
     },
     value: {
       required: true
     },
+    required: {
+      type: Boolean,
+      default: false
+    },
     v: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    label() {
+      let val = this.fieldLabel || humanize(this.fieldName)
+      return this.isRequired ? val : val + ' *'
     }
   },
   data() {

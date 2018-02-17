@@ -9,7 +9,7 @@
       </header>
       <section class="modal-card-body">
 
-        <form v-on:submit.prevent="saveItem">
+        <form v-on:submit.prevent="saveItem" @keyup.enter="saveItem">
 
           <text-inputfield fieldName="name"
                            :required=true
@@ -18,13 +18,13 @@
                            @changeValue="updateField"/>
 
           <quantity-inputfield fieldName="quantity" 
-                               fieldLabel="Quantity" 
+                               :required=true
                                :value="item.quantity"
                                :v="$v.item.quantity"
                                @changeValue="updateField"/>
 
           <quantity-inputfield fieldName="minimum_quantity" 
-                               fieldLabel="Minimum Quantity" 
+                               :required=true
                                :value="item.minimum_quantity"
                                :v="$v.item.minimum_quantity"
                                @changeValue="updateField"/>
