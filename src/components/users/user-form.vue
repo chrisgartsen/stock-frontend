@@ -8,9 +8,15 @@
       </header>
       <section class="modal-card-body">
         <text-inputfield fieldName="name"
-                         fieldLabel = "Name *"
+                         :required=true
                          :value="user.name"
                          :v="$v.user.name"
+                         @changeValue="updateField"/>
+        <text-inputfield fieldName="password"
+                         :required=true
+                         type="password"
+                         :value="user.password"
+                         :v="$v.user.password"
                          @changeValue="updateField"/>
       </section>
       <footer class="modal-card-foot">
@@ -40,7 +46,8 @@ export default {
     return {
       user: {
         id: 0,
-        name: ''
+        name: '',
+        password: ''
       }
     }
   },
@@ -48,11 +55,18 @@ export default {
     user: {
       name: {
         required
+      },
+      password: {
+        required
       }
     }
   },
   methods: {
     closeForm() {
+      this.user.id = 0
+      this.user.name = ''
+      this.user.password = ''
+      this.$v.$reset()
       this.$emit('hideForm')
     },
     updateField(fieldName, newValue) {
@@ -60,6 +74,7 @@ export default {
     },
     saveUser() {
       console.log("SAVING")
+      this.$v.$touch()
     }
   }
 

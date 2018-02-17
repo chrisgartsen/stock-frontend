@@ -14,7 +14,7 @@
                  v-model="val" @change="change" @blur="v.$touch()">
         </div>
         <div class="control" v-if="v.$error">
-          <span class="help is-danger" v-if="!v.required">{{ fieldLabel }} is required</span>
+          <span class="help is-danger" v-if="!v.required">{{ label }} is required</span>
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@ export default {
       type: String,
       required: true
     },
-    requiredValue: {
+    required: {
       type: Boolean,
       default: false
     },
@@ -51,7 +51,7 @@ export default {
   computed: {
     label() {
       let val = this.fieldLabel || humanize(this.fieldName) 
-      return this.requiredValue ? val + ' *' : val
+      return this.required ? val + ' *' : val
     }
   },
   data() {
