@@ -9,14 +9,14 @@
       <section class="modal-card-body">
         <text-inputfield fieldName="name"
                          :required=true
+                         :hasError="$v.user.name.$error"
                          :value="user.name"
-                         :v="$v.user.name"
                          @changeValue="updateField"/>
         <text-inputfield fieldName="password"
-                         :required=true
                          type="password"
+                         :required=true
+                         :hasError="$v.user.password.$error"
                          :value="user.password"
-                         :v="$v.user.password"
                          @changeValue="updateField"/>
       </section>
       <footer class="modal-card-foot">
@@ -75,6 +75,7 @@ export default {
     saveUser() {
       console.log("SAVING")
       this.$v.$touch()
+      console.log(this.$v)
     }
   }
 

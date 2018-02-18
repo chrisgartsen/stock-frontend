@@ -10,11 +10,11 @@
           <input type="text" 
                  :id="fieldName" 
                  class="input" 
-                 :class="{'is-danger': v.$error}" 
-                 v-model="val" @change="change" @blur="v.$touch()">
+                 :class="{'is-danger': hasError}" 
+                 v-model="val" @change="change">
         </div>
-        <div class="control" v-if="v.$error">
-          <span class="help is-danger" v-if="!v.required">{{ label }} is required</span>
+        <div class="control" v-if="hasError">
+          <span class="help is-danger">An error occured</span>
         </div>
       </div>
     </div>
@@ -43,10 +43,10 @@ export default {
       type: Boolean,
       default: false
     },
-    v: {
-      type: Object,
-      required: true
-    }
+    hasError: {
+      type: Boolean,
+      default: false
+    },
   },
   computed: {
     label() {
@@ -61,13 +61,11 @@ export default {
   },
   methods: {
     change() {
-      //this.v.$touch()
       this.$emit("changeValue", this.fieldName, this.val)
     }
   },
   watch: {
     value(newVal) {
-     // this.v.$touch()
       this.val = newVal
     }
   }
