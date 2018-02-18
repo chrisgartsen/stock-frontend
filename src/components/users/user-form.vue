@@ -9,14 +9,21 @@
       <section class="modal-card-body">
         <text-inputfield fieldName="name"
                          :required=true
-                         :hasError="$v.user.name.$error"
+                         :validation="$v.user.name"
                          :value="user.name"
                          @changeValue="updateField"/>
         <text-inputfield fieldName="password"
-                         type="password"
+                         fieldType="password"
                          :required=true
-                         :hasError="$v.user.password.$error"
+                         :validation="$v.user.password"
                          :value="user.password"
+                         @changeValue="updateField"/>
+        <text-inputfield fieldName="password_confirmation"
+                         fieldLabel = "Confirm password"
+                         fieldType="password"
+                         :required=true
+                         :validation="$v.user.password_confirmation"
+                         :value="user.password_confirmation"
                          @changeValue="updateField"/>
       </section>
       <footer class="modal-card-foot">
@@ -28,7 +35,7 @@
 </template>
 
 <script>
-import {required} from 'vuelidate/lib/validators'
+import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 import textInputfield from '@/components/shared/text-inputfield'
 
 export default {
@@ -47,17 +54,23 @@ export default {
       user: {
         id: 0,
         name: '',
-        password: ''
+        password: '',
+        password_confirmation: ''
       }
     }
   },
   validations: {
     user: {
       name: {
-        required
+        required,
+        minLength: minLength(8)
       },
       password: {
-        required
+        required,
+        minLength: minLength(6)
+      },
+      password_confirmation: {
+        sameAs: sameAs('password')
       }
     }
   },
@@ -66,16 +79,21 @@ export default {
       this.user.id = 0
       this.user.name = ''
       this.user.password = ''
+      this.user.password_confirmation = ''
       this.$v.$reset()
       this.$emit('hideForm')
     },
     updateField(fieldName, newValue) {
       this.user[fieldName] = newValue
     },
-    saveUser() {
-      console.log("SAVING")
+    validateInput() {
       this.$v.$touch()
-      console.log(this.$v)
+    },
+    saveUser() {
+      this.validateInput()
+      if(!this.$v.$error) {
+        console.log("SAVING")
+      }
     }
   }
 

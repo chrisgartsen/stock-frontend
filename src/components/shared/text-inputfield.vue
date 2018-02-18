@@ -2,19 +2,21 @@
   
   <div class="field is-horizontal">
     <div class="field-label">
-      <label class="label" :for="fieldName">{{ label }}</label>
+      <label class="label" :for="fieldName">{{ labelRequired }}</label>
     </div>
     <div class="field-body">
       <div class="field">
         <div class="control">
-          <input type="text" 
+          <input :type="fieldType" 
                  :id="fieldName" 
                  class="input" 
                  :class="{'is-danger': hasError}" 
                  v-model="val" @change="change">
         </div>
         <div class="control" v-if="hasError">
-          <span class="help is-danger">An error occured</span>
+          <span class="help is-danger" v-if="hasRequiredError">{{label}} is required</span>
+          <span class="help is-danger" v-if="hasMinLengthError">{{label}} should be at least {{validation.$params.minLength.min }} characters</span>
+          <span class="help is-danger" v-if="hasConfirmError">{{label}} should be match {{validation.$params.sameAs.eq }}</span>
         </div>
       </div>
     </div>
@@ -35,6 +37,10 @@ export default {
     fieldLabel: {
       type: String,
     },
+    fieldType: {
+      type: String,
+      default: 'text'
+    },
     value: {
       type: String,
       required: true
@@ -43,15 +49,41 @@ export default {
       type: Boolean,
       default: false
     },
-    hasError: {
-      type: Boolean,
-      default: false
+    validation: {
+      type: Object,
+      required: true
     },
   },
   computed: {
     label() {
-      let val = this.fieldLabel || humanize(this.fieldName) 
-      return this.required ? val + ' *' : val
+      return this.fieldLabel || humanize(this.fieldName) 
+    },
+    labelRequired() {
+      return this.required ? this.label + ' *' : this.label
+    },
+    hasError() {
+      return this.validation.$error
+    },
+    hasRequiredError() {
+      if(this.validation.$params.required) {
+        return (this.validation.$error && !this.validation.required)
+      } else {
+        return false
+      }
+    },
+    hasMinLengthError() {
+      if(this.validation.$params.minLength) {
+        return (this.validation.$error && !this.validation.minLength)
+      } else {
+        return false
+      }
+    },
+    hasConfirmError() {
+      if(this.validation.$params.sameAs) {
+        return (this.validation.$error && !this.validation.sameAs)
+      } else {
+        return false
+      }
     }
   },
   data() {
