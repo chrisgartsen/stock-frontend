@@ -12,6 +12,11 @@
                          :validation="$v.user.name"
                          :value="user.name"
                          @changeValue="updateField"/>
+        <text-inputfield fieldName="email"
+                         :required=true
+                         :validation="$v.user.email"
+                         :value="user.email"
+                         @changeValue="updateField"/>
         <text-inputfield fieldName="password"
                          fieldType="password"
                          :required=true
@@ -35,7 +40,7 @@
 </template>
 
 <script>
-import { required, minLength, sameAs } from 'vuelidate/lib/validators'
+import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
 import textInputfield from '@/components/shared/text-inputfield'
 
 export default {
@@ -54,6 +59,7 @@ export default {
       user: {
         id: 0,
         name: '',
+        email: '',
         password: '',
         password_confirmation: ''
       }
@@ -64,6 +70,10 @@ export default {
       name: {
         required,
         minLength: minLength(8)
+      },
+      email: {
+        required,
+        email
       },
       password: {
         required,
@@ -78,6 +88,7 @@ export default {
     closeForm() {
       this.user.id = 0
       this.user.name = ''
+      this.user.email = ''
       this.user.password = ''
       this.user.password_confirmation = ''
       this.$v.$reset()

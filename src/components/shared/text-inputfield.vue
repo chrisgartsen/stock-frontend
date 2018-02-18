@@ -14,9 +14,10 @@
                  v-model="val" @change="change">
         </div>
         <div class="control" v-if="hasError">
-          <span class="help is-danger" v-if="hasRequiredError">{{label}} is required</span>
-          <span class="help is-danger" v-if="hasMinLengthError">{{label}} should be at least {{validation.$params.minLength.min }} characters</span>
-          <span class="help is-danger" v-if="hasConfirmError">{{label}} should be match {{validation.$params.sameAs.eq }}</span>
+          <span class="help is-danger" v-if="hasErrorFor('required')">{{label}} is required</span>
+          <span class="help is-danger" v-if="hasErrorFor('minLength')">{{label}} must at least {{validation.$params.minLength.min }} characters</span>
+          <span class="help is-danger" v-if="hasErrorFor('sameAs')">{{label}} must match {{validation.$params.sameAs.eq }}</span>
+          <span class="help is-danger" v-if="hasErrorFor('email')">{{label}} must be a valid email</span>
         </div>
       </div>
     </div>
@@ -64,27 +65,6 @@ export default {
     hasError() {
       return this.validation.$error
     },
-    hasRequiredError() {
-      if(this.validation.$params.required) {
-        return (this.validation.$error && !this.validation.required)
-      } else {
-        return false
-      }
-    },
-    hasMinLengthError() {
-      if(this.validation.$params.minLength) {
-        return (this.validation.$error && !this.validation.minLength)
-      } else {
-        return false
-      }
-    },
-    hasConfirmError() {
-      if(this.validation.$params.sameAs) {
-        return (this.validation.$error && !this.validation.sameAs)
-      } else {
-        return false
-      }
-    }
   },
   data() {
     return {
@@ -94,7 +74,14 @@ export default {
   methods: {
     change() {
       this.$emit("changeValue", this.fieldName, this.val)
-    }
+    },
+    hasErrorFor(valType) {
+      if(this.validation.$params[valType]) {
+        return (this.validation.$error && !this.validation[valType])
+      } else {
+        return false
+      }
+    },
   },
   watch: {
     value(newVal) {
