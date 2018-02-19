@@ -30,6 +30,22 @@
                          :validation="$v.user.password_confirmation"
                          :value="user.password_confirmation"
                          @changeValue="updateField"/>
+
+        <div class="field is-horizontal">
+          <div class="field-label">
+          </div>
+          <div class="field-body">
+              <div class="field">
+                <div class="pretty p-default p-curve">
+                  <input type="checkbox" />
+                  <div class="state p-primary-o">
+                    <label>Admin</label>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
       </section>
       <footer class="modal-card-foot">
         <button class="button is-primary" @click="saveUser">Create</button>

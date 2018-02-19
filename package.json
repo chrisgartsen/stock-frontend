@@ -19,6 +19,7 @@
     "humanize-string": "^1.0.1",
     "moment": "^2.20.1",
     "node-sass": "^4.7.2",
+    "pretty-checkbox": "^3.0.3",
     "request": "2.34",
     "sass-loader": "^6.0.6",
     "vue": "^2.5.2",
