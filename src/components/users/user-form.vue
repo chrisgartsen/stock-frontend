@@ -36,10 +36,25 @@
           </div>
           <div class="field-body">
               <div class="field">
-                <div class="pretty p-default p-curve">
-                  <input type="checkbox" />
+                <div class="pretty p-default p-curve p-smooth">
+                  <input type="checkbox" v-model='user.admin' />
                   <div class="state p-primary-o">
                     <label>Admin</label>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label">
+          </div>
+          <div class="field-body">
+              <div class="field">
+                <div class="pretty p-default p-curve p-smooth">
+                  <input type="checkbox" v-model='user.active' />
+                  <div class="state p-primary-o">
+                    <label>Active</label>
                   </div>
                 </div>
               </div>
@@ -77,7 +92,9 @@ export default {
         name: '',
         email: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
+        admin: false,
+        active: false
       }
     }
   },
@@ -107,6 +124,8 @@ export default {
       this.user.email = ''
       this.user.password = ''
       this.user.password_confirmation = ''
+      this.user.active = false
+      this.user.admin = false
       this.$v.$reset()
       this.$emit('hideForm')
     },
@@ -120,6 +139,7 @@ export default {
       this.validateInput()
       if(!this.$v.$error) {
         console.log("SAVING")
+        console.log(this.user)
       }
     }
   }
