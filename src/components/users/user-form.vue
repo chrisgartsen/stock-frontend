@@ -30,37 +30,12 @@
                          :validation="$v.user.password_confirmation"
                          :value="user.password_confirmation"
                          @changeValue="updateField"/>
-
-        <div class="field is-horizontal">
-          <div class="field-label">
-          </div>
-          <div class="field-body">
-              <div class="field">
-                <div class="pretty p-default p-curve p-smooth">
-                  <input type="checkbox" v-model='user.admin' />
-                  <div class="state p-primary-o">
-                    <label>Admin</label>
-                  </div>
-                </div>
-              </div>
-          </div>
-        </div>
-
-        <div class="field is-horizontal">
-          <div class="field-label">
-          </div>
-          <div class="field-body">
-              <div class="field">
-                <div class="pretty p-default p-curve p-smooth">
-                  <input type="checkbox" v-model='user.active' />
-                  <div class="state p-primary-o">
-                    <label>Active</label>
-                  </div>
-                </div>
-              </div>
-          </div>
-        </div>
-
+        <checkbox-field fieldName="admin"
+                        :value="user.admin"
+                        @changeValue="updateField"/>
+        <checkbox-field fieldName="active"
+                        :value="user.active"
+                        @changeValue="updateField"/>
       </section>
       <footer class="modal-card-foot">
         <button class="button is-primary" @click="saveUser">Create</button>
@@ -73,6 +48,7 @@
 <script>
 import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
 import textInputfield from '@/components/shared/text-inputfield'
+import checkboxField from '@/components/shared/checkbox-field'
 
 export default {
   name: 'user-form',
@@ -83,7 +59,8 @@ export default {
     }
   },
   components: {
-    textInputfield
+    textInputfield,
+    checkboxField
   },
   data() {
     return {
