@@ -7,35 +7,38 @@
         <button class="delete" @click="closeForm"></button>
       </header>
       <section class="modal-card-body">
-        <text-inputfield fieldName="name"
-                         :required=true
-                         :validation="$v.user.name"
-                         :value="user.name"
-                         @changeValue="updateField"/>
-        <text-inputfield fieldName="email"
-                         :required=true
-                         :validation="$v.user.email"
-                         :value="user.email"
-                         @changeValue="updateField"/>
-        <text-inputfield fieldName="password"
-                         fieldType="password"
-                         :required=true
-                         :validation="$v.user.password"
-                         :value="user.password"
-                         @changeValue="updateField"/>
-        <text-inputfield fieldName="password_confirmation"
-                         fieldLabel = "Confirm password"
-                         fieldType="password"
-                         :required=true
-                         :validation="$v.user.password_confirmation"
-                         :value="user.password_confirmation"
-                         @changeValue="updateField"/>
-        <checkbox-field fieldName="admin"
-                        :value="user.admin"
-                        @changeValue="updateField"/>
-        <checkbox-field fieldName="active"
-                        :value="user.active"
-                        @changeValue="updateField"/>
+        <form v-on:submit.prevent="saveUser" @keyup.enter="saveUser">
+          <text-inputfield fieldName="name"
+                          :required=true
+                          :validation="$v.user.name"
+                          :value="user.name"
+                          @changeValue="updateField"/>
+          <text-inputfield fieldName="email"
+                          :required=true
+                          :validation="$v.user.email"
+                          :value="user.email"
+                          @changeValue="updateField"/>
+          <text-inputfield fieldName="password"
+                          fieldType="password"
+                          :required=true
+                          :validation="$v.user.password"
+                          :value="user.password"
+                          @changeValue="updateField"/>
+          <text-inputfield fieldName="password_confirmation"
+                          fieldLabel = "Confirm password"
+                          fieldType="password"
+                          :required=true
+                          :validation="$v.user.password_confirmation"
+                          :value="user.password_confirmation"
+                          @changeValue="updateField"/>
+          <checkbox-field fieldName="admin"
+                          :value="user.admin"
+                          @changeValue="updateField"/>
+          <checkbox-field fieldName="active"
+                          :value="user.active"
+                          @changeValue="updateField"/>
+          <span class="help">Fields marked with * are required.</span>
+        </form>
       </section>
       <footer class="modal-card-foot">
         <button class="button is-primary" @click="saveUser">Create</button>
@@ -115,8 +118,8 @@ export default {
     saveUser() {
       this.validateInput()
       if(!this.$v.$error) {
-        console.log("SAVING")
-        console.log(this.user)
+        this.$store.dispatch("PROCESS_USER", this.user)
+        this.closeForm()
       }
     }
   }
