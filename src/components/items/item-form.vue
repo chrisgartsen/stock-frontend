@@ -14,7 +14,7 @@
           <text-inputfield fieldName="name"
                            :required=true
                            :value="item.name"
-                           :v="$v.item.name"
+                           :validation="$v.item.name"
                            @changeValue="updateField"/>
 
           <quantity-inputfield fieldName="quantity" 
