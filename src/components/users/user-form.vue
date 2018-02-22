@@ -3,7 +3,7 @@
     <div class="modal-background" @click="closeForm"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Add User</p>
+        <p class="modal-card-title">{{ formTitle }}</p>
         <button class="delete" @click="closeForm"></button>
       </header>
       <section class="modal-card-body">
@@ -61,6 +61,11 @@ export default {
       type: Boolean
     }
   },
+  computed: {
+    formTitle() {
+      return "Add user"
+    }
+  },
   components: {
     textInputfield,
     checkboxField
@@ -107,7 +112,7 @@ export default {
       this.user.active = false
       this.user.admin = false
       this.$v.$reset()
-      this.$emit('hideForm')
+      this.$store.dispatch("HIDE_USER_FORM")
     },
     updateField(fieldName, newValue) {
       this.user[fieldName] = newValue

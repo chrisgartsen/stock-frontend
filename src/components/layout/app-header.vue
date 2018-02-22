@@ -17,7 +17,7 @@
         <div id="navbarMenuHeroA" class="navbar-menu">
           <div class="navbar-end">
             <span class="navbar-item">
-              <a class="button is-primary is-inverted">
+              <a class="button is-primary is-inverted" @click="login">
                 <span class="icon">
                   <i class="fa fa-user"></i>
                 </span>
@@ -40,11 +40,27 @@
       </div>
     </nav>
   </div>
+
+  <login-form :showForm="showForm"/>
 </section>
 </template>
 
 <script>
+import loginForm from '@/components/auth/login-form'
 export default {
-  name: 'app-header'
+  name: 'app-header',
+  components: {
+    loginForm
+  },
+  computed: {
+    showForm() {
+      return this.$store.getters.showLoginForm
+    }
+  },
+  methods: {
+    login() {
+      this.$store.dispatch("SHOW_LOGIN_FORM")
+    }
+  }
 }
 </script>

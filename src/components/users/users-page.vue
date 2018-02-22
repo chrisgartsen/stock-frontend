@@ -22,7 +22,7 @@
       <div class="column is-8 is-offset-2">
         <users-list :users="users" :isLoading="isLoading"/>
         <icon-button label="Add User" @buttonClick="addUser"/>
-        <user-form :showForm="showForm" v-on:hideForm="hideForm"></user-form>
+        <user-form :showForm="showForm"></user-form>
       </div>
     </div>
 
@@ -55,9 +55,6 @@ export default {
   methods: {
     addUser() {
       this.$store.dispatch("SHOW_NEW_USER_FORM")
-    },
-    hideForm() {
-      this.$store.dispatch("HIDE_USER_FORM")
     },
   },
   created() {
