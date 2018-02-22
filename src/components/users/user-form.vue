@@ -41,7 +41,7 @@
         </form>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-primary" @click="saveUser">Create</button>
+        <button class="button is-primary" @click="saveUser" :disabled="$v.$error">Create</button>
         <button class="button" @click="closeForm">Cancel</button>
       </footer>
     </div>
