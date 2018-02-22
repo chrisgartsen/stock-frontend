@@ -6,7 +6,9 @@
     <td>{{user.admin}}</td>
     <td>{{user.created_at | dateFormat}}</td>
     <td>{{user.updated_at | dateFormat}}</td>
-    <td></td>
+    <td>
+      <button class="button is-outlined is-small is-danger" @click="deleteUser(user.id)">Delete</button>   
+    </td>
   </tr>
 </template>
 
@@ -17,6 +19,11 @@ export default {
     user: {
       required: true,
       type: Object
+    }
+  },
+  methods: {
+    deleteUser(id) {
+      this.$store.dispatch("DELETE_USER", id)
     }
   }
 }

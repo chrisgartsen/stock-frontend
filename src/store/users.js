@@ -32,6 +32,10 @@ export default {
     ADD_USER(state, user) {
       state.users.push(user)
     },
+    REMOVE_USER(state, userId) {
+      var removeIndex = state.users.map(function(user) { return user.id; }).indexOf(userId);
+      state.users.splice(removeIndex, 1)
+    },
     SET_USER_FORM_VISIBLE(state, visible) {
       state.showForm = visible
     }
@@ -52,7 +56,6 @@ export default {
       commit("SET_USER_FORM_VISIBLE", false)
     },
     PROCESS_USER(context, user) {
-      console.log(user)
       context.dispatch("CREATE_USER",{
         name: user.name,
         email: user.email,
@@ -63,11 +66,21 @@ export default {
       })
     },
     CREATE_USER({commit}, user) {
-      api.create(user).then((response) => {
-          commit("ADD_USER", response.data)
+      return new Promise((resolve, reject) => {
+        api.create(user).then((response) => {
+            commit("ADD_USER", response.data)
+            resolve(response)
+        }).catch((error) => {
+          console.log(error.response)
+        })
+       })
+    },
+    DELETE_USER({commit}, id) {
+      api.delete(id).then((response) => {
+        commit("REMOVE_USER", id)
       }).catch((error) => {
         console.log(error.response)
-      })
+      })  
     }
   }
 }

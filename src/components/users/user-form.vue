@@ -118,8 +118,9 @@ export default {
     saveUser() {
       this.validateInput()
       if(!this.$v.$error) {
-        this.$store.dispatch("PROCESS_USER", this.user)
-        this.closeForm()
+        this.$store.dispatch("PROCESS_USER", this.user).then((response) => {
+          this.closeForm()
+        })
       }
     }
   }
