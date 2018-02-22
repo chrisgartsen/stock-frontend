@@ -13,7 +13,6 @@
                           :validation="$v.user.name"
                           :value="user.name"
                           @changeValue="updateField"/>
-                          {{ $v.user.name }}
           <text-inputfield fieldName="email"
                           :required=true
                           :validation="$v.user.email"
@@ -91,11 +90,11 @@ export default {
       name: {
         required,
         minLength: minLength(8),
-        unique: uniqueValidator
       },
       email: {
         required,
-        email
+        email,
+        unique: uniqueValidator
       },
       password: {
         required,

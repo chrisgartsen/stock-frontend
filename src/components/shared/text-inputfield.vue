@@ -80,12 +80,12 @@ export default {
     hasErrorFor(valType) {
       if(this.validator.$params[valType]) {
         return (this.validator.$error && !this.validator[valType])
-      } else {
+      } else {   
         return false
       }
-    },
+    }, 
   },
-  watch: {
+  watch: {   
     value(newVal) {
       this.val = newVal
     },
