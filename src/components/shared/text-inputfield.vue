@@ -15,9 +15,10 @@
         </div>
         <div class="control" v-if="hasError">
           <span class="help is-danger" v-if="hasErrorFor('required')">{{label}} is required</span>
-          <span class="help is-danger" v-if="hasErrorFor('minLength')">{{label}} must at least {{validation.$params.minLength.min }} characters</span>
-          <span class="help is-danger" v-if="hasErrorFor('sameAs')">{{label}} must match {{validation.$params.sameAs.eq }}</span>
+          <span class="help is-danger" v-if="hasErrorFor('minLength')">{{label}} must at least {{validator.$params.minLength.min }} characters</span>
+          <span class="help is-danger" v-if="hasErrorFor('sameAs')">{{label}} must match {{validator.$params.sameAs.eq }}</span>
           <span class="help is-danger" v-if="hasErrorFor('email')">{{label}} must be a valid email</span>
+          <span class="help is-danger" v-if="hasErrorFor('unique')">{{label}} is already taken</span>
         </div>
       </div>
     </div>
@@ -63,12 +64,13 @@ export default {
       return this.required ? this.label + ' *' : this.label
     },
     hasError() {
-      return this.validation.$error
+      return this.validator.$error
     },
   },
   data() {
     return {
-      val: this.value
+      val: this.value,
+      validator: this.validation
     }
   },
   methods: {
@@ -76,8 +78,8 @@ export default {
       this.$emit("changeValue", this.fieldName, this.val)
     },
     hasErrorFor(valType) {
-      if(this.validation.$params[valType]) {
-        return (this.validation.$error && !this.validation[valType])
+      if(this.validator.$params[valType]) {
+        return (this.validator.$error && !this.validator[valType])
       } else {
         return false
       }
@@ -86,6 +88,9 @@ export default {
   watch: {
     value(newVal) {
       this.val = newVal
+    },
+    validation(newVal) {
+      this.validator = newVal
     }
   }
 }

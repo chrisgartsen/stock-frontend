@@ -3,7 +3,6 @@ export default {
   state: {
     showForm: false
   },
-
   getters: {
     showLoginForm(state) {
       return state.showForm

@@ -13,6 +13,7 @@
                           :validation="$v.user.name"
                           :value="user.name"
                           @changeValue="updateField"/>
+                          {{ $v.user.name }}
           <text-inputfield fieldName="email"
                           :required=true
                           :validation="$v.user.email"
@@ -53,6 +54,8 @@ import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
 import textInputfield from '@/components/shared/text-inputfield'
 import checkboxField from '@/components/shared/checkbox-field'
 
+import uniqueValidator from '@/validators/unique-validator'
+
 export default {
   name: 'user-form',
   props: {
@@ -87,7 +90,8 @@ export default {
     user: {
       name: {
         required,
-        minLength: minLength(8)
+        minLength: minLength(8),
+        unique: uniqueValidator
       },
       email: {
         required,
