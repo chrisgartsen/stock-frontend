@@ -5,9 +5,9 @@
     <nav class="navbar">
       <div class="container">
         <div class="navbar-brand">
-          <a class="navbar-item">
+          <router-link class="navbar-item" :to="{name: 'items'}" exact>
             <h2 class="title is-2">Stock</h2>
-          </a>
+          </router-link>
           <span class="navbar-burger burger" data-target="navbarMenuHeroA">
             <span></span>
             <span></span>
