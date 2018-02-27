@@ -7,6 +7,33 @@
         <button class="delete" @click="closeForm"></button>
       </header>
       <section class="modal-card-body">
+
+        <form v-on:submit.prevent="login" @keyup.enter="login">
+
+          <div class="field is-horizontal">
+            <div class="field-label">
+              <label for="email" class="label">Email</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <input type="text" class="input" v-model="email" id="email">
+              </div>
+            </div>
+          </div>
+
+          <div class="field is-horizontal">
+            <div class="field-label">
+              <label for="password" class="label">Password</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <input type="password" class="input" v-model="password" id="password">
+              </div>
+            </div>
+          </div>
+
+        </form>
+
       </section>
       <footer class="modal-card-foot">
         <button class="button is-primary" @click="login">Login</button>
@@ -25,12 +52,20 @@ export default {
       type: Boolean
     }
   },
+  data() {
+    return {
+      email: '',
+      password: ''
+    }
+  },
   methods: {
     closeForm() {
       this.$store.dispatch("HIDE_LOGIN_FORM")
     },
     login() {
-      console.log("Loggin in")
+      console.log("Login in")
+      console.log(this.email)
+      console.log(this.password)
     }
   }
 }
