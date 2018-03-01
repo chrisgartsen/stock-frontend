@@ -8,6 +8,13 @@
       </header>
       <section class="modal-card-body">
 
+        <div class="message is-danger" v-if="hasLoginError">
+          <div class="message-header">
+            <p>Login Failed</p>
+          </div>
+          <div class="message-body">{{errorMessage}}</div>
+        </div>
+
         <form v-on:submit.prevent="login" @keyup.enter="login">
 
           <div class="field is-horizontal">
@@ -36,7 +43,7 @@
 
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-primary" @click="login">Login</button>
+        <button class="button is-primary" @click="login" :disabled="blockLogin">Login</button>
         <button class="button" @click="closeForm">Cancel</button>
       </footer>
     </div> 
@@ -60,6 +67,18 @@ export default {
       password: ''
     }
   },
+  computed: {
+    blockLogin() {
+      return this.$store.getters.isLoggingIn
+    },
+    hasLoginError() {
+      return this.$store.getters.hasLoginError
+    },
+    errorMessage() {
+      return this.$store.getters.loginError
+    }
+
+  },
   methods: {
     closeForm() {
       this.email = ''
@@ -68,6 +87,9 @@ export default {
     },
     login() {
       this.$store.dispatch("LOGIN", {email: this.email, password: this.password})
+        .then((response) => { 
+          this.closeForm()
+        })
     }
   }
 }

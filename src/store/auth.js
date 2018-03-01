@@ -5,13 +5,27 @@ export default {
   state: {
     showForm: false,
     authToken: null,
-    userId: null
+    userId: null,
+    loginState: false,
+    loginError: false,
+    loginErrorMessage: ''
   },
   getters: {
     showLoginForm(state) {
       return state.showForm
     },
-
+    isLoggingIn(state) {
+      return state.loginState
+    },
+    isLoggedIn(state) {
+      return state.userId != null
+    },
+    hasLoginError(state) {
+      return state.loginError
+    },
+    loginError(state) {
+      return state.loginErrorMessage
+    }
   },
   mutations: {
     SET_LOGIN_FORM_VISIBLE(state, visible) {
@@ -19,24 +33,59 @@ export default {
     },
     SET_TOKEN(state, authToken) {
       state.authToken = authToken
+    },
+    SET_USER_ID(state, userId) {
+      state.userId = userId
+    },
+    SET_LOGIN_STATE(state, login) {
+      state.loginState = login
+    },
+    SET_LOGIN_ERROR(state, errorMessage) {
+      state.loginError = true
+      state.loginErrorMessage = errorMessage
+    },
+    RESET_LOGIN_ERROR(state) {
+      state.loginError = false
+      state.loginErrorMessage = ''
+    },
+    CLEAR_TOKEN(state) {
+      state.authToken = null
+    },
+    CLEAR_USER_ID(state) {
+      state.userId = null
     }
   },
   actions: {
     SHOW_LOGIN_FORM({commit}) {
-      commit("SET_LOGIN_FORM_VISIBLE", true)
+      commit('SET_LOGIN_FORM_VISIBLE', true)
     },
     HIDE_LOGIN_FORM({commit}) {
-      commit("SET_LOGIN_FORM_VISIBLE", false)
+      commit('SET_LOGIN_FORM_VISIBLE', false)
+      commit('SET_LOGIN_STATE', false)
+      commit('RESET_LOGIN_ERROR')
     },
-    LOGIN({commit}, authData) {
-      Axios.post("http://localhost:3000/login", {email: authData.email, password: authData.password})
-      .then((response) => {
-        commit('SET_TOKEN', response.data.auth_token)
-      }).catch((error) => { 
-        console.log("Error")
-        console.log(error.response)
-      })
-    }
+    LOGOUT({commit}){
+      commit('CLEAR_TOKEN')
+      commit('CLEAR_USER_ID')
+    },
+    LOGIN({commit, dispatch}, authData) {
+      commit('SET_LOGIN_STATE', true)
+      return new Promise((resolve, reject) => {
+        Axios.post("http://localhost:3000/login", {email: authData.email, password: authData.password})
+        .then((response) => {
+          commit('SET_TOKEN', response.data.auth_token)
+          commit('SET_USER_ID', response.data.user_id)
+          commit('SET_LOGIN_STATE', false)
+          console.log("Loggin in user " + response.data.user_id)
+          resolve(Response)
+        })
+        .catch((error) => {
+          commit('SET_LOGIN_STATE', false)
+          commit('SET_LOGIN_ERROR', error.response.data.error)
+        })   
+      })     
+    }  
+
   }
 
 }

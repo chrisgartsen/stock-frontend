@@ -16,12 +16,20 @@
         </div>
         <div id="navbarMenuHeroA" class="navbar-menu">
           <div class="navbar-end">
-            <span class="navbar-item">
+            <span class="navbar-item" v-if="!isLoggedIn">
               <a class="button is-primary is-inverted" @click="login">
                 <span class="icon">
-                  <i class="fa fa-user"></i>
+                  <i class="fa fa-sign-in"></i>
                 </span>
                 <span>Login</span>
+              </a>
+            </span>
+            <span class="navbar-item" v-if="isLoggedIn">
+              <a class="button is-primary is-inverted" @click="logout">
+                <span class="icon">
+                  <i class="fa fa-sign-out"></i>
+                </span>
+                <span>Logout</span>
               </a>
             </span>
           </div>
@@ -55,11 +63,17 @@ export default {
   computed: {
     showForm() {
       return this.$store.getters.showLoginForm
+    },
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn
     }
   },
   methods: {
     login() {
-      this.$store.dispatch("SHOW_LOGIN_FORM")
+      this.$store.dispatch('SHOW_LOGIN_FORM')
+    },
+    logout() {
+      this.$store.dispatch('LOGOUT')
     }
   }
 }
