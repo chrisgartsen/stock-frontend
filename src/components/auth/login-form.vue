@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import Axios from 'axios'
+
 export default {
   name: 'login-form',
   props: {
@@ -60,12 +62,12 @@ export default {
   },
   methods: {
     closeForm() {
+      this.email = ''
+      this.password = ''
       this.$store.dispatch("HIDE_LOGIN_FORM")
     },
     login() {
-      console.log("Login in")
-      console.log(this.email)
-      console.log(this.password)
+      this.$store.dispatch("LOGIN", {email: this.email, password: this.password})
     }
   }
 }
