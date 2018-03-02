@@ -5,7 +5,7 @@
     <nav class="navbar">
       <div class="container">
         <div class="navbar-brand">
-          <router-link class="navbar-item" :to="{name: 'items'}" exact>
+          <router-link class="navbar-item" :to="{name: 'home'}" exact>
             <h2 class="title is-2">Stock</h2>
           </router-link>
           <span class="navbar-burger burger" data-target="navbarMenuHeroA">
@@ -74,6 +74,7 @@ export default {
     },
     logout() {
       this.$store.dispatch('LOGOUT')
+      this.$router.push('/')
     }
   }
 }

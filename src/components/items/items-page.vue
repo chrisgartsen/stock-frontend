@@ -5,7 +5,7 @@
       <div class="column is-10 is-offset-2">
         <nav class="breadcrumb" aria-label="breadcrumbs">
           <ul>
-            <li><a>Home</a></li>
+            <li><router-link :to="{name: 'home'}">Home</router-link></li>
             <li class="is-active"><a href="#" aria-current="page">Items</a></li>
           </ul>
         </nav>
