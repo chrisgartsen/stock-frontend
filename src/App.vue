@@ -17,7 +17,11 @@ export default {
     appHeader,
     appContent,
     appFooter
+  },
+  created() {
+    this.$store.dispatch("AUTO_LOGIN")
   }
+
 }
 </script>
 

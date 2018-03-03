@@ -67,6 +67,21 @@ export default {
     LOGOUT({commit}){
       commit('CLEAR_TOKEN')
       commit('CLEAR_USER_ID')
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+    },
+    AUTO_LOGIN({commit}) {
+      console.log('AUTO LOGIN')
+      const token = localStorage.getItem('token')
+      const user = localStorage.getItem('user')
+      if(!token) {
+        console.log("FAILED")
+        return
+      } else {
+        console.log("SUCCEEDED")
+        commit('SET_TOKEN', token)
+        commit('SET_USER_ID', user)
+      }
     },
     LOGIN({commit, dispatch}, authData) {
       commit('SET_LOGIN_STATE', true)
@@ -77,6 +92,8 @@ export default {
           commit('SET_USER_ID', response.data.user_id)
           commit('SET_LOGIN_STATE', false)
           console.log("Loggin in user " + response.data.user_id)
+          localStorage.setItem('token', response.data.auth_token)
+          localStorage.setItem('user', response.data.user_id)
           resolve(Response)
         })
         .catch((error) => {
