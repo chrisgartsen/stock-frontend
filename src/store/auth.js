@@ -86,7 +86,7 @@ export default {
     LOGIN({commit, dispatch}, authData) {
       commit('SET_LOGIN_STATE', true)
       return new Promise((resolve, reject) => {
-        Axios.post("http://localhost:3000/login", {email: authData.email, password: authData.password})
+        Axios.post("https://boiling-dawn-28052.herokuapp.com/login", {email: authData.email, password: authData.password})
         .then((response) => {
           commit('SET_TOKEN', response.data.auth_token)
           commit('SET_USER_ID', response.data.user_id)

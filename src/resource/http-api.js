@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import { error } from 'util';
 
-const BASE_URL = 'http://localhost:3000/'
+const BASE_URL = 'https://boiling-dawn-28052.herokuapp.com/'
 
 class HttpApi {
 
