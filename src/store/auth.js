@@ -1,5 +1,9 @@
 import Axios from 'axios'
 
+import AuthApi from '@/resource/auth-api'
+
+let api = new AuthApi()
+
 export default {
 
   state: {
@@ -71,14 +75,9 @@ export default {
       localStorage.removeItem('user')
     },
     AUTO_LOGIN({commit}) {
-      console.log('AUTO LOGIN')
       const token = localStorage.getItem('token')
       const user = localStorage.getItem('user')
-      if(!token) {
-        console.log("FAILED")
-        return
-      } else {
-        console.log("SUCCEEDED")
+      if(token) {
         commit('SET_TOKEN', token)
         commit('SET_USER_ID', user)
       }
@@ -86,12 +85,10 @@ export default {
     LOGIN({commit, dispatch}, authData) {
       commit('SET_LOGIN_STATE', true)
       return new Promise((resolve, reject) => {
-        Axios.post("https://boiling-dawn-28052.herokuapp.com/login", {email: authData.email, password: authData.password})
-        .then((response) => {
+        api.login(authData.email, authData.password) .then((response) => {
           commit('SET_TOKEN', response.data.auth_token)
           commit('SET_USER_ID', response.data.user_id)
           commit('SET_LOGIN_STATE', false)
-          console.log("Loggin in user " + response.data.user_id)
           localStorage.setItem('token', response.data.auth_token)
           localStorage.setItem('user', response.data.user_id)
           resolve(Response)
