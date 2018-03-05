@@ -1,8 +1,6 @@
 import Axios from 'axios'
 
-const BASE_URL = 'http://localhost:3000'
-
-//'https://boiling-dawn-28052.herokuapp.com'
+const BASE_URL = process.env.BACKEND_URL
 
 class HttpApi {
 
