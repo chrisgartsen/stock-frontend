@@ -1,4 +1,5 @@
 <template>
+
 <section class="hero is-primary is-medium">
   <!-- Hero head: will stick at the top -->
   <div class="hero-head">
@@ -16,14 +17,27 @@
         </div>
         <div id="navbarMenuHeroA" class="navbar-menu">
           <div class="navbar-end">
-            <span class="navbar-item" v-if="!isLoggedIn">
-              <a class="button is-primary is-inverted" @click="login">
-                <span class="icon">
-                  <i class="fa fa-sign-in"></i>
-                </span>
-                <span>Login</span>
-              </a>
-            </span>
+
+            <template v-if="!isLoggedIn"> 
+              <span class="navbar-item">
+                <router-link :to="{name: 'login'}" class="button is-primary is-inverted">                
+                  <span class="icon">
+                    <i class="fa fa-sign-in"></i>
+                  </span>
+                  <span>Login</span>
+                </router-link>
+              </span>      
+              <span class="navbar-item">or</span>
+              <span class="navbar-item">
+                <router-link :to="{name: 'register'}" class="button is-primary is-inverted">                
+                  <span class="icon">
+                    <i class="fa fa-user-plus"></i>
+                  </span>
+                  <span>Register</span>
+                </router-link>
+              </span>      
+            </template>
+
             <span class="navbar-item" v-if="isLoggedIn">
               <a class="button is-primary is-inverted" @click="logout">
                 <span class="icon">
@@ -42,36 +56,26 @@
     <nav class="tabs">
       <div class="container">
         <ul>
-          <router-link :to="{name: 'items'}" tag="li" exact><a>Items</a></router-link>
-          <router-link :to="{name: 'users'}" tag="li"><a>Users</a></router-link>
+          <router-link v-if="isLoggedIn" :to="{name: 'items'}" tag="li" exact><a>Items</a></router-link>
+          <router-link v-if="isLoggedIn" :to="{name: 'users'}" tag="li"><a>Users</a></router-link>
+          <router-link v-if="!isLoggedIn" to="/login" tag="li"><a>Login</a></router-link>
         </ul>
       </div>
     </nav>
   </div>
-
-  <login-form :showForm="showForm"/>
 </section>
+
 </template>
 
 <script>
-import loginForm from '@/components/auth/login-form'
 export default {
   name: 'app-header',
-  components: {
-    loginForm
-  },
   computed: {
-    showForm() {
-      return this.$store.getters.showLoginForm
-    },
     isLoggedIn() {
       return this.$store.getters.isLoggedIn
     }
   },
   methods: {
-    login() {
-      this.$store.dispatch('SHOW_LOGIN_FORM')
-    },
     logout() {
       this.$store.dispatch('LOGOUT')
       this.$router.push('/')

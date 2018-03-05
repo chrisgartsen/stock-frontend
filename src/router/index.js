@@ -4,6 +4,8 @@ import store from '@/store'
 
 import welcome from '@/components/static/welcome-page'
 import login from '@/components/auth/login-page'
+import error from '@/components/auth/error-page'
+import register from '@/components/auth/registration-page'
 import items from '@/components/items/items-page'
 import users from '@/components/users/users-page'
 
@@ -15,9 +17,11 @@ const router = new Router({
   linkActiveClass: 'is-active',
   routes: [
     { path: '/', name: 'home', component: welcome}, 
-    { path: '/login', name: 'login', component: login}, 
+    { path: '/login', name: 'login', component: login},
+    { path: '/login-error', name: 'loginError', component: error}, 
+    { path: '/register', name: 'register', component: register},
     { path: '/items', name: 'items', component: items, meta: { requiresAuth: true }},
-    { path: '/users', name: 'users', component: users, meta: { requiresAuth: true }}
+    { path: '/users', name: 'users', component: users, meta: { requiresAuth: true }},
   ],
 
 })
@@ -27,7 +31,7 @@ router.beforeEach((to, from, next) =>{
     if(store.getters.isLoggedIn) {
       next()
     } else {
-      next({path: '/login'})
+      next({path: '/login-error'})
     }
   } else {
     next()

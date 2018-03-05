@@ -68,6 +68,9 @@ export default {
       commit('SET_LOGIN_STATE', false)
       commit('RESET_LOGIN_ERROR')
     },
+    RESET_LOGIN({commit}) {
+      commit('RESET_LOGIN_ERROR')
+    },
     LOGOUT({commit}){
       commit('CLEAR_TOKEN')
       commit('CLEAR_USER_ID')

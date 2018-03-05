@@ -77,7 +77,6 @@ export default {
     errorMessage() {
       return this.$store.getters.loginError
     }
-
   },
   methods: {
     closeForm() {
