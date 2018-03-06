@@ -2,7 +2,7 @@
   <div>
 
     <div class="columns">
-      <div class="column is-10 is-offset-2">
+      <div class="column is-8 is-offset-2">
         <nav class="breadcrumb" aria-label="breadcrumbs">
           <ul>
             <li><router-link to="/">Home</router-link></li>
@@ -16,7 +16,7 @@
       <div class="column is-3 is-offset-4">
         <h2 class="title is-2">Login</h2>
 
-        <div class="message is-danger" v-if="hasLoginError">
+        <div class="message is-danger" v-if="showLoginError">
           <div class="message-header">
             <p>Login Failed</p>
           </div>
@@ -26,11 +26,10 @@
           </div>
         </div>
 
-<div class="notification" v-if="blockLogin">
-  <p>Login in process. Please wait.</p>
-  <loader :loading="true"></loader>
-</div>
-
+        <div class="notification" v-if="blockLogin">
+          <p>Login in process. Please wait.</p>
+          <loader :loading="true"></loader>
+        </div>
 
         <form v-on:submit.prevent="login" @keyup.enter="login">
 
@@ -71,7 +70,7 @@
                   <span class="icon is-small"><i class="fa fa-sign-in"></i></span>
                   <span>Login</span>
                 </button>
-                <button class="button is-text" @click.prevent="forgotPassword">Forgot password?</button>
+                <router-link class="button is-text" to="/recover">Forgot password?</router-link>
               </div>
             </div>
           </div>
@@ -103,8 +102,8 @@ export default {
     blockLogin() {
       return this.$store.getters.isLoggingIn
     },
-    hasLoginError() {
-      return this.$store.getters.hasLoginError
+    showLoginError() {
+      return this.$store.getters.hasLoginError && !this.$store.getters.isLoggingIn
     },
     errorMessage() {
       return this.$store.getters.loginError
@@ -117,9 +116,6 @@ export default {
           this.$router.push('/')
         })
     },
-    forgotPassword() {
-      alert("BAD LUCK!!! :->")
-    }
   },
   created() {
     this.$store.dispatch("RESET_LOGIN")
