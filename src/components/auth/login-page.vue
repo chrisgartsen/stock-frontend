@@ -13,7 +13,7 @@
     </div>
 
     <div class="columns">
-      <div class="column is-4 is-offset-4">
+      <div class="column is-3 is-offset-4">
         <h2 class="title is-2">Login</h2>
 
         <div class="message is-danger" v-if="hasLoginError">
@@ -25,6 +25,12 @@
             <p>Please try again.</p>
           </div>
         </div>
+
+<div class="notification" v-if="blockLogin">
+  <p>Login in process. Please wait.</p>
+  <loader :loading="true"></loader>
+</div>
+
 
         <form v-on:submit.prevent="login" @keyup.enter="login">
 
@@ -61,7 +67,7 @@
             </div>
             <div class="field-body">
               <div class="field">
-                <button class="button is-primary">
+                <button class="button is-primary" :disabled="blockLogin">
                   <span class="icon is-small"><i class="fa fa-sign-in"></i></span>
                   <span>Login</span>
                 </button>
@@ -73,15 +79,20 @@
         <br>
         <p>Not registered yet? Register <router-link to="/register" class="page-link is-important">here</router-link>.</p>
       </div>
+
     </div>
 
   </div>  
 </template>
 
 <script>
+import loader from 'vue-spinner/src/ClipLoader'
 
 export default {
   name: 'login-page',
+  components: {
+    loader
+  },
   data() {
     return {
       email: '',
