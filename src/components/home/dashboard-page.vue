@@ -1,5 +1,7 @@
 <template>
-  <div>Authorised</div>
+  <div>
+    
+  </div>
 </template>
 
 <script>
