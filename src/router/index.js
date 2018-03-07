@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store'
 
-import main from '@/components/home/main-page'
+import home from '@/components/home/home-page'
 import login from '@/components/auth/login-page'
 import error from '@/components/auth/error-page'
 import register from '@/components/auth/registration-page'
@@ -17,7 +17,7 @@ const router = new Router({
   mode: 'history',
   linkActiveClass: 'is-active',
   routes: [
-    { path: '/', name: 'home', component: main}, 
+    { path: '/', name: 'home', component: home}, 
     { path: '/login', name: 'login', component: login},
     { path: '/login-error', name: 'loginError', component: error}, 
     { path: '/register', name: 'register', component: register},
