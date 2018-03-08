@@ -21,6 +21,48 @@
     </div>
   </div>
 
+  <div class="columns">
+    <div class="column is-2 is-offset-3">
+      <div class="card">
+        <div class="card-content">
+            A lot of text
+        </div>
+        <footer class="card-footer">
+          <p class="card-footer-item">
+            <span><a href="#">Learn more...</a></span>
+          </p>
+        </footer>
+      </div>
+    </div>
+
+    <div class="column is-2">
+      <div class="card">
+        <div class="card-content">
+            A lot of text
+        </div>
+        <footer class="card-footer">
+          <p class="card-footer-item">
+            <span><a href="#">Learn more...</a></span>
+          </p>
+        </footer>
+      </div>
+    </div>
+
+    <div class="column is-2">
+      <div class="card">
+        <div class="card-content">
+            A lot of text
+        </div>
+        <footer class="card-footer">
+          <p class="card-footer-item">
+            <span><a href="#">Learn more...</a></span>
+          </p>
+        </footer>
+      </div>
+    </div>
+
+  </div>
+
 </article>
 </template>
 
