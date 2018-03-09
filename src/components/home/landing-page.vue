@@ -25,7 +25,9 @@
     <div class="column is-2 is-offset-3">
       <div class="card">
         <div class="card-content">
-            A lot of text
+          <p class="title">Manage items</p>
+          <p><i class="fa fa-list fa-5x"></i></p>
+          <p>Manage your inventories, create grocery lists and receive warnings when your stock is low.</p>
         </div>
         <footer class="card-footer">
           <p class="card-footer-item">
@@ -38,7 +40,9 @@
     <div class="column is-2">
       <div class="card">
         <div class="card-content">
-            A lot of text
+          <p class="title">Export your lists</p>
+          <p> <i class="fa fa-cloud-upload fa-5x"></i></p>
+          <p>Export your inventory to the cloud. Whatever that may mean.</p>
         </div>
         <footer class="card-footer">
           <p class="card-footer-item">
@@ -51,7 +55,9 @@
     <div class="column is-2">
       <div class="card">
         <div class="card-content">
-            A lot of text
+          <p class="title">Mobile device</p>
+          <p><i class="fa fa-mobile fa-5x"></i></p>
+          <p>Works on your mobile too. It's supposed to be response.</p>
         </div>
         <footer class="card-footer">
           <p class="card-footer-item">
