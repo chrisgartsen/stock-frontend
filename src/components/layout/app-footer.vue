@@ -1,6 +1,7 @@
 <template>
   <footer class="footer">
-    <span>Stock @2018</span>
+    <div><router-link to="/about">About</router-link></div>
+    <div>Stock @2018</div>
   </footer>
 </template>
 

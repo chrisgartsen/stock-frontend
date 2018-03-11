@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import store from '@/store'
 
 import home from '@/components/home/home-page'
+import about from '@/components/about/about-page'
 import login from '@/components/auth/login-page'
 import error from '@/components/auth/error-page'
 import register from '@/components/auth/registration-page'
@@ -22,6 +23,7 @@ const router = new Router({
     { path: '/login-error', name: 'loginError', component: error}, 
     { path: '/register', name: 'register', component: register},
     { path: '/recover', name: 'recover', component: recover},
+    { path: '/about', name: 'about', component: about},
     { path: '/items', name: 'items', component: items, meta: { requiresAuth: true }},
     { path: '/users', name: 'users', component: users, meta: { requiresAuth: true }},
   ],
