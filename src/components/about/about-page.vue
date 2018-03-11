@@ -63,8 +63,36 @@
     </div>
 
     <div class="columns">
-      <div class="column is-offset-3">
+      <div class="column is-6 is-offset-3">
   
+        <section class="accordions">
+          <article class="accordion is-active">
+            <div class="accordion-header toggle">
+              <p>Why Bulma and not Bootstrap?</p>
+              <button class="toggle" aria-label="toggle"></button>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                Two reasons. Bootstrap v4 has been in beta for a very long time. 
+                And unlike Bootstrap, Bulma is 100% guaranteed Javascript free. This makes using Bulma with Vue much easier.
+              </div>
+            </div>
+          </article>
+
+          <article class="accordion">
+            <div class="accordion-header toggle">
+              <p>Another question</p>
+              <button class="toggle" aria-label="toggle"></button>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                A second question - to make sure that the accordion is working.
+              </div>
+            </div>
+          </article>
+
+        </section>
+
       </div>
     </div>
 
@@ -72,6 +100,8 @@
 </template>
 
 <script>
+import accordion from 'bulma-accordion/dist/bulma-accordion.min.js';
+
 export default {
   name: 'about-page'
 }

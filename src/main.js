@@ -6,6 +6,7 @@ import store from './store'
 // Bulma
 import 'font-awesome/css/font-awesome.css'
 import './assets/sass/main.scss'
+import accordion from 'bulma-accordion/dist/bulma-accordion.min.js';
 
 // Utility libaries
 import Vuelidate from 'vuelidate'
