@@ -79,3 +79,12 @@ table {
     color: $primary;
   }
 }
+
+.list {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+.list-indented {
+  list-style-type: circle;
+  padding-left: 20px;
+}
