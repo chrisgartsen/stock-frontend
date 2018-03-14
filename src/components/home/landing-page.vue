@@ -11,7 +11,7 @@
     <div class="column is-6 is-offset-3">
         <p>Stock is a showcase website built with <a href="http://vuejs.org">Vue.js</a>.</p>
         <p>It contains functionality you would normally see on a website, in an attempt to translate the examples from your tutorial or blog to real life (working) code.</p>  
-        <p>Have a look on the <router-link to="/about">about page</router-link> to see what techniques are used.</p>
+        <p>Have a look on the <router-link to="/tech-stack">technology stack page</router-link> to see what techniques are used.</p>
         <br>
         <p>--this is a landing page--</p>
         <p>(every website needs a landing page nowadays to lure unexpected customers)</p>

@@ -6,7 +6,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
           <ul>
             <li><router-link :to="{name: 'home'}">Home</router-link></li>
-            <li class="is-active"><a href="#" aria-current="page">About</a></li>
+            <li class="is-active"><a href="#" aria-current="page">Tech stack</a></li>
           </ul>
         </nav>
       </div>
@@ -49,7 +49,10 @@
             <p class="card-header-title">Back end</p>
           </header>
           <div class="card-content">
-            <p>Manage your inventories, create grocery lists and receive warnings when your stock is low.</p>
+            <ul class="list">
+              <li>Ruby on Rails (v5.1)</li>
+              <li>PostgreSQL</li>
+            </ul>
           </div>
         </div>
       </div>  
