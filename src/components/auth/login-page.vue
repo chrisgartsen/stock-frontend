@@ -27,7 +27,9 @@
         </div>
 
         <div class="notification" v-if="blockLogin">
-          <p>Login in process. Please wait.</p>
+          <p>Login in process. Please wait....</p>
+          <p>This could take some time if the backend server is asleep...</p>
+          <p>(It's free...so...) </p>
           <loader :loading="true"></loader>
         </div>
 
