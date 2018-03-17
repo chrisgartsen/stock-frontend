@@ -7368,6 +7368,13 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-bulma-accordion@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/vue-bulma-accordion/-/vue-bulma-accordion-0.3.4.tgz#a73228200662c79f9945dc5d2a5c19d13a43a431"
+  dependencies:
+    bulma "^0.6.2"
+    vue "^2.5.2"
+
 vue-hot-reload-api@^2.2.0:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.2.4.tgz#683bd1d026c0d3b3c937d5875679e9a87ec6cd8f"

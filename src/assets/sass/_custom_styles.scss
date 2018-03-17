@@ -88,3 +88,9 @@ table {
   list-style-type: circle;
   padding-left: 20px;
 }
+
+.accordion {
+  .card-header {
+    background-color: $white-ter;
+  }
+     }

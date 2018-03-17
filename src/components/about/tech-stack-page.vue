@@ -68,33 +68,16 @@
     <div class="columns">
       <div class="column is-6 is-offset-3">
   
-        <section class="accordions">
-          <article class="accordion is-active">
-            <div class="accordion-header toggle">
-              <p>Why Bulma and not Bootstrap?</p>
-              <button class="toggle" aria-label="toggle"></button>
-            </div>
-            <div class="accordion-body">
-              <div class="accordion-content">
-                Two reasons. Bootstrap v4 has been in beta for a very long time. 
-                And unlike Bootstrap, Bulma is 100% guaranteed Javascript free. This makes using Bulma with Vue much easier.
-              </div>
-            </div>
-          </article>
-
-          <article class="accordion">
-            <div class="accordion-header toggle">
-              <p>Another question</p>
-              <button class="toggle" aria-label="toggle"></button>
-            </div>
-            <div class="accordion-body">
-              <div class="accordion-content">
-                A second question - to make sure that the accordion is working.
-              </div>
-            </div>
-          </article>
-
-        </section>
+        <bulma-accordion :dropdown="false" :icon="'plus-minus'">
+          <bulma-accordion-item>
+            <h4 class="has-text-weight-semibold" slot="title">Why Bulma?</h4>
+            <p slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eos illo expedita asperiores rem iure aliquid dolore, pariatur dignissimos, minima inventore? Minima voluptatum nulla, error omnis laboriosam voluptatibus rem aperiam.</p>
+          </bulma-accordion-item>
+          <bulma-accordion-item>
+            <h4 class="has-text-weight-semibold" slot="title">Another question</h4>
+            <p slot="content">To make it look interesting</p>
+          </bulma-accordion-item>
+        </bulma-accordion>
 
       </div>
     </div>
@@ -103,9 +86,13 @@
 </template>
 
 <script>
-import accordion from 'bulma-accordion/dist/bulma-accordion.min.js';
+import { BulmaAccordion, BulmaAccordionItem } from 'vue-bulma-accordion'
 
 export default {
-  name: 'about-page'
+  name: 'about-page',
+  components: {
+    BulmaAccordion,
+    BulmaAccordionItem
+  }
 }
 </script>
