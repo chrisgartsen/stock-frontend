@@ -1,7 +1,6 @@
 import Axios from 'axios'
 
 const BASE_URL = process.env.BACKEND_URL
-
 class HttpApi {
 
   constructor(resource) {
@@ -12,7 +11,12 @@ class HttpApi {
     return BASE_URL + '/' + this.resource
   }
 
+  setAuthHeader() {
+    Axios.defaults.headers.common['auth'] = localStorage.getItem('token')
+  }
+
   getAll() {
+    this.setAuthHeader()
     return new Promise((resolve, reject) => {
       Axios.get(this.getUrl()).then((response) => {
         resolve(response)
@@ -23,6 +27,7 @@ class HttpApi {
   }
 
   get(id) {
+    this.setAuthHeader()
     return new Promise((resolve, reject) => {
       Axios.get(this.getUrl() + '/' + id).then((response) => {
         resolve(response)
@@ -33,6 +38,7 @@ class HttpApi {
   }
   
   create(item) {
+    this.setAuthHeader()
     return new Promise((resolve, reject) => {
       Axios.post(this.getUrl(), item).then((response) => {
         resolve(response)
@@ -43,6 +49,7 @@ class HttpApi {
   }
   
   update(item) {
+    this.setAuthHeader()
     return new Promise((resolve, reject) => {
       Axios.put(this.getUrl() + '/' + item.id, item).then((response) => {
         resolve(response)
@@ -53,6 +60,7 @@ class HttpApi {
   }
 
   delete(id) {
+    this.setAuthHeader()
     return new Promise((resolve, reject) => {
       Axios.delete(this.getUrl() + '/' + id).then((response) => {
         resolve(response)

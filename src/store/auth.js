@@ -90,6 +90,8 @@ export default {
       return new Promise((resolve, reject) => {
         api.login(authData.email, authData.password) .then((response) => {
           commit('SET_TOKEN', response.data.auth_token)
+          console.log("Setting Token")
+          console.log(response.data.auth_token)
           commit('SET_USER_ID', response.data.user_id)
           commit('SET_LOGIN_STATE', false)
           localStorage.setItem('token', response.data.auth_token)

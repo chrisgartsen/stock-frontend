@@ -1,7 +1,6 @@
 import Axios from 'axios'
 
 const BASE_URL = process.env.BACKEND_URL
-
 class AuthApi {
 
   login(email, password) {
