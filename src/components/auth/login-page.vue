@@ -13,7 +13,7 @@
     </div>
 
     <div class="columns">
-      <div class="column is-3 is-offset-4">
+      <div class="column is-4 is-offset-4">
         <h2 class="title is-2">Login</h2>
 
         <div class="message is-danger" v-if="showLoginError">
