@@ -13,11 +13,46 @@
     </div>
     
     <div class="columns">
-      <div class="column is-6 is-offset-3">
+      <div class="column is-4 is-offset-4">
         <h2 class="title is-2">Register</h2>
 
-        <construction/>
+        <form v-on:submit.prevent="register" @keyup.enter="register">
 
+          <div class="field is-horizontal">
+            <div class="field-label">
+              <label for="name" class="label">Name *</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control has-icons-left">
+                  <input type="text" class="input" :class="{'is-danger': $v.name.$error}" 
+                         v-model="name" id="name" @blur="$v.name.$touch()">
+                  <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+                </div>
+                <div class="control" v-if="$v.name.$error">
+                  <span class="help is-danger" v-if="!$v.name.required">Name is required</span>
+                  <span class="help is-danger" v-if="!$v.name.minLength">Name should be 8 characters or more</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field is-horizontal">
+            <div class="field-label"></div>
+            <div class="field-body">
+              <div class="field">
+                <button class="button is-primary">
+                  <span class="icon is-small"><i class="fa fa-user-plus"></i></span>
+                  <span>Register</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <span class="help">Fields marked with * are required.</span>
+        </form>
+        <br>
+        <p>Already registered? Log in <router-link to="/login" class="page-link is-important">here</router-link>.</p>
       </div>
     </div>
 
@@ -25,13 +60,30 @@
 </template>
 
 <script>
-import construction from '@/components/shared/construction-page'
+import { required, minLength } from 'vuelidate/lib/validators'
 
 export default {
   name: 'registration-page',
-  components: {
-    construction
+  data() {
+    return {
+      name: ''
+    }
+  },
+  methods: {
+    register() {
+      this.$v.$touch()
+      if(!this.$v.$error) {
+        console.log("Registering...")
+      }
+    }
+  },
+  validations: {
+    name: {
+      required,
+      minLength: minLength(8)
+    }
   }
+
 }
 </script>
 

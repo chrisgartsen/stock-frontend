@@ -13,6 +13,10 @@ class AuthApi {
     })
   }
 
+  register(name, email, password, password_confirmation)  {
+    
+
+  }
 }
 
 export default AuthApi

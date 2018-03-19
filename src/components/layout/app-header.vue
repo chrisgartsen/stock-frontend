@@ -58,7 +58,7 @@
         <ul>
           <router-link v-if="isLoggedIn" :to="{name: 'items'}" tag="li" exact><a>Items</a></router-link>
           <router-link v-if="isLoggedIn" :to="{name: 'users'}" tag="li"><a>Users</a></router-link>
-          <router-link v-if="!isLoggedIn" to="/login" tag="li"><a>Login</a></router-link>
+          <li v-if="!isLoggedIn"><a href="#">&nbsp;</a></li>
         </ul>
       </div>
     </nav>
