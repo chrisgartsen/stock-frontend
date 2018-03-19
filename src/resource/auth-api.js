@@ -14,9 +14,16 @@ class AuthApi {
   }
 
   register(name, email, password, password_confirmation)  {
-    
+
 
   }
+
+  checkUniqueEmail(email) {
+    return Axios.post(BASE_URL + '/email_validator', {email: email}).then((response) => {
+      return response.data.valid
+    })
+  }
+
 }
 
 export default AuthApi

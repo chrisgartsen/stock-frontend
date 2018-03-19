@@ -38,6 +38,64 @@
           </div>
 
           <div class="field is-horizontal">
+            <div class="field-label">
+              <label for="email" class="label">Email *</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control has-icons-left">
+                  <input type="text" class="input" :class="{'is-danger': $v.email.$error}" 
+                         v-model.lazy="email" id="email" @blur="$v.email.$touch()">
+                  <span class="icon is-small is-left"><i class="fa fa-envelope"></i></span>
+                </div>
+                <div class="control" v-if="$v.email.$error">
+                  <span class="help is-danger" v-if="!$v.email.required">Email is required</span>
+                  <span class="help is-danger" v-if="!$v.email.email">Email must be a valid email format</span>
+                  <span class="help is-danger" v-if="!$v.email.unique">Email is already taken</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field is-horizontal">
+            <div class="field-label">
+              <label for="password" class="label">Password *</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control has-icons-left">
+                  <input type="password" class="input" :class="{'is-danger': $v.password.$error}" 
+                         v-model="password" id="password" @blur="$v.password.$touch()">
+                  <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+                </div>
+                <div class="control" v-if="$v.password.$error">
+                  <span class="help is-danger" v-if="!$v.password.required">Password is required</span>
+                  <span class="help is-danger" v-if="!$v.password.minLength">Password should be 6 characters or more</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field is-horizontal">
+            <div class="field-label">
+              <label for="password_confirmation" class="label">Confirm password *</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control has-icons-left">
+                  <input type="password" class="input" :class="{'is-danger': $v.password_confirmation.$error}" 
+                         v-model="password_confirmation" id="password_confirmation" @blur="$v.password_confirmation.$touch()">
+                  <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+                </div>
+                <div class="control" v-if="$v.password_confirmation.$error">
+                  <span class="help is-danger" v-if="!$v.password_confirmation.required">Confirmation is required</span>
+                  <span class="help is-danger" v-if="!$v.password_confirmation.sameAs">Confirmation must match password</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field is-horizontal">
             <div class="field-label"></div>
             <div class="field-body">
               <div class="field">
@@ -60,13 +118,18 @@
 </template>
 
 <script>
-import { required, minLength } from 'vuelidate/lib/validators'
+import Axios from 'axios'
+import { required, minLength, email, sameAs } from 'vuelidate/lib/validators'
+import uniqueEmail from '@/validators/unique-email'
 
 export default {
   name: 'registration-page',
   data() {
     return {
-      name: ''
+      name: '',
+      email: '',
+      password: '',
+      password_confirmation: ''
     }
   },
   methods: {
@@ -81,6 +144,19 @@ export default {
     name: {
       required,
       minLength: minLength(8)
+    },
+    email: {
+      required,
+      email,
+      unique: uniqueEmail
+    },
+    password: {
+      required,
+      minLength: minLength(6)
+    },
+    password_confirmation: {
+      required,
+      sameAs: sameAs('password')
     }
   }
 
