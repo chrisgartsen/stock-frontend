@@ -108,6 +108,20 @@
           </div>
 
           <span class="help">Fields marked with * are required.</span>
+
+          <div class="field is-horizontal">
+            <div class="field-label"></div>
+            <div class="field-body">
+              <div class="field">
+                <vue-recaptcha @verify="onVerify"
+                               @expired="onExpired"
+                               ref="recaptcha"
+                               size="invisible"
+                               sitekey="6Lf1j00UAAAAAPkZs77eMKP-zrqpcGYOeEyyED-1"></vue-recaptcha>
+              </div>
+            </div>
+          </div>
+
         </form>
         <br>
         <p>Already registered? Log in <router-link to="/login" class="page-link is-important">here</router-link>.</p>
@@ -121,9 +135,13 @@
 import Axios from 'axios'
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators'
 import uniqueEmail from '@/validators/unique-email'
+import VueRecaptcha from 'vue-recaptcha';
 
 export default {
   name: 'registration-page',
+  components: {
+    VueRecaptcha
+  },
   data() {
     return {
       name: '',
@@ -136,9 +154,16 @@ export default {
     register() {
       this.$v.$touch()
       if(!this.$v.$error) {
-        console.log("Registering...")
+        this.$refs.recaptcha.execute();
       }
-    }
+    },
+    onVerify: function (response) {
+      this.$store.dispatch("REGISTER_USER", 
+        {name: this.name, email: this.email, password: this.password, password_confirmation: this.password_confirmation})
+    },
+    onExpired: function () {
+      console.log('Expired')
+    },
   },
   validations: {
     name: {

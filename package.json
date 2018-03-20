@@ -25,6 +25,7 @@
     "sass-loader": "^6.0.6",
     "vue": "^2.5.2",
     "vue-bulma-accordion": "^0.3.4",
+    "vue-recaptcha": "^1.1.0",
     "vue-router": "^3.0.1",
     "vue-spinner": "^1.0.3",
     "vuelidate": "^0.6.1",

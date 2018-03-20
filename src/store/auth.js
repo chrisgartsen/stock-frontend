@@ -101,8 +101,11 @@ export default {
           commit('SET_LOGIN_ERROR', error.response.data.error)
         })   
       })     
-    }  
-
+    },  
+    REGISTER_USER(context, userData) {
+      console.log(userData)
+      //REGISTER_USER is different api then CREATE_USER, because it needs to blacklist both booleans
+    }
   }
 
 }
